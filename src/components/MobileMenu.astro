@@ -1,0 +1,168 @@
+---
+import Bouton from "./Bouton.jsx";
+import { House, User, BriefcaseBusiness, Github, Linkedin } from 'lucide-astro';
+
+const links = [
+  { href: '/', label: 'Accueil', num: '01', icon: House, curtain: '#FBE38E' },
+  { href: '/about', label: 'À propos', num: '02', icon: User, curtain: '#7DFFB3' },
+  { href: '/projets', label: 'Projets', num: '03', icon: BriefcaseBusiness, curtain: '#A3D8E2' },
+];
+---
+
+<div class="md:hidden">
+  <!-- Bouton Burger Neobrutaliste -->
+  <button
+    id="mobile-menu-btn"
+    type="button"
+    aria-label="Menu de navigation"
+    aria-expanded="false"
+    class="relative w-10 h-10 bg-white border-2 border-black shadow-[2px_2px_0px_#000] flex flex-col items-center justify-center gap-1 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all cursor-pointer z-[70]"
+  >
+    <span class="burger-bar w-5 h-0.5 bg-black rounded-full transition-transform duration-300"></span>
+    <span class="burger-bar w-5 h-0.5 bg-black rounded-full transition-opacity duration-200"></span>
+    <span class="burger-bar w-5 h-0.5 bg-black rounded-full transition-transform duration-300"></span>
+  </button>
+
+  <!-- Overlay plein écran style "index" -->
+  <div
+    id="mobile-drawer"
+    class="hidden fixed inset-0 bg-[#F4EFEA] z-[60] flex flex-col"
+  >
+    <!-- Bandeau défilant -->
+    <div class="relative overflow-hidden border-b-2 border-black bg-black py-2 shrink-0">
+      <div class="flex whitespace-nowrap">
+        <span class="animate-marquee shrink-0 font-mono font-black text-sm uppercase tracking-widest text-white pr-8">
+          ★ MENU ★ NAVIGATION ★ EXPLORE ★ MENU ★ NAVIGATION ★ EXPLORE
+        </span>
+        <span class="animate-marquee shrink-0 font-mono font-black text-sm uppercase tracking-widest text-white pr-8" aria-hidden="true">
+          ★ MENU ★ NAVIGATION ★ EXPLORE ★ MENU ★ NAVIGATION ★ EXPLORE
+        </span>
+      </div>
+    </div>
+
+    <!-- Liens de navigation, style index plein écran -->
+    <nav class="flex-1 flex flex-col justify-center px-5 gap-3">
+      {links.map((link, i) => {
+        const Icon = link.icon;
+        return (
+          <a
+            href={link.href}
+            data-curtain-color={link.curtain}
+            data-hover-color={link.curtain}
+            aria-label={link.label.toUpperCase()}
+            style={`transition-delay: ${i * 70}ms;`}
+            class="menu-row group flex items-center gap-4 bg-white border-2 border-black shadow-[3px_3px_0px_#000] px-4 py-4 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
+          >
+            <span class="font-mono text-xs font-bold text-black/40">{link.num}</span>
+            <Icon class="w-5 h-5 text-black shrink-0 transition-transform duration-200 group-active:scale-90" stroke-width={2.4} />
+            <span class="font-black text-xl uppercase tracking-tight flex-1">{link.label}</span>
+            <span class="text-lg transition-transform duration-200 group-active:translate-x-1">→</span>
+          </a>
+        );
+      })}
+    </nav>
+
+    <!-- Bas : CTA + réseaux sociaux -->
+    <div class="shrink-0 px-5 pb-6 pt-2 flex flex-col gap-3 border-t-2 border-black/15">
+      <Bouton href="/contact" className="w-full text-center" client:load />
+
+      <div class="flex gap-2">
+        <a
+          href="https://github.com/ton-profil"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex-1 flex items-center justify-center gap-2 py-2 bg-white border-2 border-black shadow-[2px_2px_0px_#000] font-mono font-bold text-xs uppercase active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all"
+        >
+          <Github class="w-4 h-4 text-black" stroke-width={2.2} /> GitHub
+        </a>
+        <a
+          href="https://linkedin.com/in/ton-profil"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex-1 flex items-center justify-center gap-2 py-2 bg-white border-2 border-black shadow-[2px_2px_0px_#000] font-mono font-bold text-xs uppercase active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all"
+        >
+          <Linkedin class="w-4 h-4 text-black" stroke-width={2.2} /> LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .menu-row {
+    transform: translateX(40px);
+    opacity: 0;
+    transition-property: transform, opacity, background-color;
+    transition-duration: 0.45s, 0.45s, 0.15s;
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1), cubic-bezier(0.22, 1, 0.36, 1), ease-out;
+  }
+
+  #mobile-drawer.menu-open .menu-row {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  .menu-row:active {
+    background-color: var(--row-hover, #FBE38E);
+  }
+</style>
+
+<script>
+  function setupMobileMenu() {
+    const btn = document.getElementById('mobile-menu-btn');
+    const drawer = document.getElementById('mobile-drawer');
+    if (!btn || !drawer) return;
+
+    const bars = btn.querySelectorAll('.burger-bar');
+    const rows = drawer.querySelectorAll('.menu-row');
+
+    rows.forEach((row) => {
+      const color = row.getAttribute('data-hover-color');
+      if (color) (row as HTMLElement).style.setProperty('--row-hover', color);
+    });
+
+    let isOpen = false;
+
+    function toggleMenu(show?: boolean) {
+      isOpen = typeof show === 'boolean' ? show : !isOpen;
+      btn.setAttribute('aria-expanded', String(isOpen));
+
+      if (isOpen) {
+        drawer.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        requestAnimationFrame(() => {
+          drawer.classList.add('menu-open');
+        });
+        if (bars.length === 3) {
+          bars[0].style.transform = 'translateY(6px) rotate(45deg)';
+          bars[1].style.opacity = '0';
+          bars[2].style.transform = 'translateY(-6px) rotate(-45deg)';
+        }
+      } else {
+        drawer.classList.remove('menu-open');
+        document.body.style.overflow = '';
+        setTimeout(() => drawer.classList.add('hidden'), 150);
+        if (bars.length === 3) {
+          bars[0].style.transform = '';
+          bars[1].style.opacity = '1';
+          bars[2].style.transform = '';
+        }
+      }
+    }
+
+    btn.onclick = (e) => {
+      e.stopPropagation();
+      toggleMenu();
+    };
+
+    drawer.querySelectorAll('.menu-row').forEach((link) => {
+      link.addEventListener('click', () => toggleMenu(false));
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (isOpen && e.key === 'Escape') toggleMenu(false);
+    });
+  }
+
+  document.addEventListener('astro:page-load', setupMobileMenu);
+</script>

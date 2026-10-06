@@ -1,0 +1,76 @@
+---
+import { Instagram, Linkedin, Github, Mail, Sparkles } from "lucide-astro";
+---
+
+<section class="border-2 border-black bg-[#F4EFEA] p-4 shadow-[4px_4px_0px_#000000] mx-auto flex flex-col justify-between max-w-sm w-full">
+  <!-- En-tête -->
+  <div>
+    <p class="font-mono font-black text-xs tracking-wider">HELLO. I'M THEO</p>
+    
+    <!-- Titres avec contour et ombre portée -->
+    <div class="mt-1 leading-none">
+      <h1 class="font-dela text-3xl font-black uppercase text-white drop-shadow-[2px_2px_0px_#000000] [text-shadow:_2px_2px_0_#000,_-1px_-1px_0_#000,_1px_-1px_0_#000,_-1px_1px_0_#000,_2px_2px_0_#000]">
+        WEB <span class="text-[#FF6B6B] drop-shadow-[2px_2px_0px_#000000]">DESIGNER</span>
+      </h1>
+      <h1 class="font-dela text-3xl font-black uppercase text-white drop-shadow-[2px_2px_0px_#000000] [text-shadow:_2px_2px_0_#000,_-1px_-1px_0_#000,_1px_-1px_0_#000,_-1px_1px_0_#000,_2px_2px_0_#000]">
+        & <span class="text-[#7DD8EC] drop-shadow-[2px_2px_0px_#000000]">DEVELOPER</span>
+      </h1>
+    </div>
+
+    <p class="font-mono font-bold text-[11px] leading-snug mt-2">
+      SPECIALIZING IN CREATIVE<br />
+      LANDING PAGES FOR BUSINESSES.
+    </p>
+  </div>
+
+  <!-- Barre inférieure : Bouton + Icônes -->
+  <div class="mt-4 flex items-center justify-between gap-2">
+    <!-- Bouton statut -->
+    <a
+      href="#contact"
+      class="flex items-center gap-1.5 bg-[#FBD74B] border-2 border-black px-3 py-1.5 shadow-[2px_2px_0px_#000000] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition-all font-mono font-bold text-[11px]"
+    >
+      <Sparkles class="w-3.5 h-3.5 stroke-[2.5]" />
+      <span>READY TO WORK</span>
+      <Sparkles class="w-3.5 h-3.5 stroke-[2.5]" />
+    </a>
+
+    <!-- Réseaux sociaux -->
+    <div class="flex items-center gap-1.5">
+      <a
+        href="https://instagram.com"
+        target="_blank"
+        aria-label="Instagram"
+        class="flex items-center justify-center w-8 h-8 border-2 border-black bg-white shadow-[2px_2px_0px_#000000] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition-all"
+      >
+        <Instagram class="w-4 h-4 stroke-[2.5]" />
+      </a>
+
+      <a
+        href="https://linkedin.com"
+        target="_blank"
+        aria-label="LinkedIn"
+        class="flex items-center justify-center w-8 h-8 border-2 border-black bg-white shadow-[2px_2px_0px_#000000] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition-all"
+      >
+        <Linkedin class="w-4 h-4 stroke-[2.5]" />
+      </a>
+
+      <a
+        href="https://github.com"
+        target="_blank"
+        aria-label="GitHub"
+        class="flex items-center justify-center w-8 h-8 border-2 border-black bg-white shadow-[2px_2px_0px_#000000] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition-all"
+      >
+        <Github class="w-4 h-4 stroke-[2.5]" />
+      </a>
+
+      <a
+        href="mailto:contact@example.com"
+        aria-label="Email"
+        class="flex items-center justify-center w-8 h-8 border-2 border-black bg-white shadow-[2px_2px_0px_#000000] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition-all"
+      >
+        <Mail class="w-4 h-4 stroke-[2.5]" />
+      </a>
+    </div>
+  </div>
+</section>

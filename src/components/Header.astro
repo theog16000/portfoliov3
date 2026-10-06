@@ -1,0 +1,154 @@
+---
+import Bouton from "./Bouton.jsx";
+import MobileMenu from "./MobileMenu.astro";
+import { House, User, BriefcaseBusiness, Github, Linkedin } from 'lucide-astro';
+---
+
+<header class="fixed top-0 left-0 w-full bg-[#F4EFEA] border-b-2 border-black items-center flex justify-between px-6 py-3 z-50">
+  
+  <!-- Photo / Profil -->
+  <div class="rounded-full object-cover w-12 shrink-0">
+    <img src="/homme.png" alt="Photo de profil" class="rounded-full border-2 border-black shadow-[2px_2px_0px_#000]">
+  </div>
+
+  <!-- Navigation Desktop : Pages avec rideau dynamique -->
+  <nav class="hidden md:flex items-center gap-3 absolute left-1/2 -translate-x-1/2"> 
+    <a 
+      href="/" 
+      aria-label="ACCUEIL"
+      data-curtain-color="#FBE38E"
+      class="group flex items-center justify-center w-10 h-10 bg-[#F4EFEA] border-2 border-black shadow-[2px_2px_0px_#000] hover:bg-[#FBE38E] hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_#000] active:translate-y-0 active:shadow-[1px_1px_0px_#000] transition-all duration-200"
+    >
+      <House class="w-5 h-5 text-black transition-transform duration-200 group-hover:scale-110 group-hover:-rotate-12" stroke-width={2.2} />
+    </a>
+
+    <a 
+      href="/about" 
+      aria-label="À PROPOS"
+      data-curtain-color="#7DFFB3"
+      class="group flex items-center justify-center w-10 h-10 bg-[#F4EFEA] border-2 border-black shadow-[2px_2px_0px_#000] hover:bg-[#7DFFB3] hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_#000] active:translate-y-0 active:shadow-[1px_1px_0px_#000] transition-all duration-200"
+    >
+      <User class="w-5 h-5 text-black transition-transform duration-200 group-hover:scale-110 group-hover:rotate-12" stroke-width={2.2} />
+    </a>
+
+    <a 
+      href="/projets" 
+      aria-label="PROJETS"
+      data-curtain-color="#A3D8E2"
+      class="group flex items-center justify-center w-10 h-10 bg-[#F4EFEA] border-2 border-black shadow-[2px_2px_0px_#000] hover:bg-[#A3D8E2] hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_#000] active:translate-y-0 active:shadow-[1px_1px_0px_#000] transition-all duration-200"
+    >
+      <BriefcaseBusiness class="w-5 h-5 text-black transition-transform duration-200 group-hover:scale-110 group-hover:-rotate-12" stroke-width={2.2} />
+    </a>
+  </nav>
+
+  <!-- Actions Desktop : Réseaux sociaux + Bouton Contact -->
+  <div class="hidden md:flex items-center gap-3">
+    <!-- Bouton GitHub -->
+    <a
+      href="https://github.com/ton-profil"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Profil GitHub"
+      class="group flex items-center justify-center w-10 h-10 bg-[#F4EFEA] border-2 border-black shadow-[2px_2px_0px_#000] hover:bg-[#E2D9F3] hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all duration-150"
+    >
+      <Github class="w-5 h-5 text-black transition-transform duration-200 group-hover:scale-110 group-hover:rotate-12" stroke-width={2.2} />
+    </a>
+
+    <!-- Bouton LinkedIn -->
+    <a
+      href="https://linkedin.com/in/ton-profil"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Profil LinkedIn"
+      class="group flex items-center justify-center w-10 h-10 bg-[#F4EFEA] border-2 border-black shadow-[2px_2px_0px_#000] hover:bg-[#A3D8E2] hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all duration-150"
+    >
+      <Linkedin class="w-5 h-5 text-black transition-transform duration-200 group-hover:scale-110 group-hover:-rotate-12" stroke-width={2.2} />
+    </a>
+
+    <Bouton />
+  </div>
+
+  <!-- Menu burger mobile -->
+  <MobileMenu client:load>
+    <Bouton />
+  </MobileMenu>
+
+</header>
+
+<script>
+  import { navigate } from 'astro:transitions/client';
+
+  function initDynamicCurtain() {
+    const wrapper = document.getElementById('curtain-wrapper');
+    const main = document.getElementById('curtain-main');
+    const shadow = document.getElementById('curtain-shadow');
+    const badgeText = document.getElementById('curtain-text');
+    if (!wrapper || !main || !shadow) return;
+
+    const savedColor = sessionStorage.getItem('curtain_color');
+    const savedLabel = sessionStorage.getItem('curtain_label');
+
+    if (savedColor) {
+      main.style.backgroundColor = savedColor;
+      if (badgeText && savedLabel) badgeText.innerText = `${savedLabel} ★`;
+
+      main.style.transform = 'translateX(0)';
+      shadow.style.transform = 'translateX(0)';
+
+      requestAnimationFrame(() => {
+        wrapper.classList.remove('curtain-in');
+        wrapper.classList.add('curtain-out');
+      });
+
+      const onOutDone = (e) => {
+        if (e.target !== main || e.propertyName !== 'transform') return;
+        main.removeEventListener('transitionend', onOutDone);
+        wrapper.className = 'pointer-events-none';
+        main.style.transform = 'translateX(-101%)';
+        shadow.style.transform = 'translateX(-101%)';
+        main.style.transition = 'none';
+        shadow.style.transition = 'none';
+        sessionStorage.removeItem('curtain_color');
+        sessionStorage.removeItem('curtain_label');
+      };
+      main.addEventListener('transitionend', onOutDone);
+    }
+
+    const links = document.querySelectorAll('[data-curtain-color]');
+    links.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        const target = link.getAttribute('href');
+        if (!target || target === window.location.pathname) return;
+
+        e.preventDefault();
+
+        const color = link.getAttribute('data-curtain-color') || '#FBE38E';
+        const label = link.getAttribute('aria-label') || 'CHARGEMENT';
+
+        sessionStorage.setItem('curtain_color', color);
+        sessionStorage.setItem('curtain_label', label);
+
+        main.style.transition = 'none';
+        shadow.style.transition = 'none';
+        main.style.transform = 'translateX(-101%)';
+        shadow.style.transform = 'translateX(-101%)';
+        main.style.backgroundColor = color;
+        if (badgeText) badgeText.innerText = `${label} ★`;
+
+        requestAnimationFrame(() => {
+          wrapper.classList.remove('curtain-out');
+          wrapper.classList.add('curtain-in');
+        });
+
+        const onInDone = (e2) => {
+          if (e2.target !== main || e2.propertyName !== 'transform') return;
+          main.removeEventListener('transitionend', onInDone);
+          navigate(target);
+        };
+        main.addEventListener('transitionend', onInDone);
+      });
+    });
+  }
+
+  document.addEventListener('astro:page-load', initDynamicCurtain);
+</script>

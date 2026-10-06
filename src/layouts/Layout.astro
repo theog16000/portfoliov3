@@ -1,0 +1,112 @@
+---
+import Header from "../components/Header.astro";
+import "../styles/global.css";
+import { ClientRouter } from "astro:transitions";
+
+interface Props {
+  title?: string;
+}
+
+const { title = "Mon Projet" } = Astro.props;
+---
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+    <ClientRouter />
+
+    <style is:global>
+      /* Désactive l'animation native de vue (View Transitions) d'Astro/ClientRouter,
+         qui variait selon la taille du contenu de chaque page et parasitait le rideau. */
+      ::view-transition-old(root),
+      ::view-transition-new(root) {
+        animation: none !important;
+        mix-blend-mode: normal !important;
+      }
+
+      #curtain-shadow {
+        position: fixed;
+        inset: 0;
+        z-index: 9998;
+        pointer-events: none;
+        background-color: #000;
+        transform: translateX(-101%);
+        will-change: transform;
+      }
+
+      #curtain-main {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        pointer-events: none;
+        background-color: #FBE38E;
+        transform: translateX(-101%);
+        will-change: transform;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #curtain-badge {
+        opacity: 0;
+        transform: scale(0.85);
+      }
+
+      @keyframes badge-fade-in {
+        from {
+          opacity: 0;
+          transform: scale(0.85);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      /* Entrée : glissement simple qui remplit toute la page */
+      .curtain-in #curtain-shadow {
+        transition: transform 1s ease-in-out !important;
+        transform: translateX(0) !important;
+      }
+      .curtain-in #curtain-main {
+        transition: transform 1s ease-in-out 0.1s !important;
+        transform: translateX(0) !important;
+      }
+      .curtain-in #curtain-badge {
+        animation: badge-fade-in 0.5s ease-out 0.5s forwards;
+      }
+
+      /* Sortie : repart dans le même sens */
+      .curtain-out #curtain-shadow {
+        transition: transform 1s ease-in-out !important;
+        transform: translateX(101%) !important;
+      }
+      .curtain-out #curtain-main {
+        transition: transform 1s ease-in-out 0.1s !important;
+        transform: translateX(101%) !important;
+      }
+      .curtain-out #curtain-badge {
+        opacity: 0;
+        transition: opacity 0.25s ease-out !important;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen bg-bg text-text flex flex-col overflow-x-hidden">
+    <div id="curtain-wrapper" class="pointer-events-none">
+      <div id="curtain-shadow" aria-hidden="true"></div>
+      <div id="curtain-main" aria-hidden="true">
+        <div id="curtain-badge" class="bg-white border-3 border-black shadow-[5px_5px_0px_#000] px-6 py-3 font-black text-xl tracking-wider uppercase -rotate-2">
+          <span id="curtain-text">PAGE ★</span>
+        </div>
+      </div>
+    </div>
+
+    <Header />
+
+    <main class="flex-1 max-w-6xl w-full mx-auto p-6 pt-24">
+      <slot />
+    </main>
+  </body>
+</html>
