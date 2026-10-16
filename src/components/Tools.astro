@@ -12,42 +12,50 @@ import Github from '../components/icons/github.svg';
   <div class="flex flex-wrap items-center justify-center gap-5 max-w-[250px] mx-auto py-3">
     
     <!-- 1. Figma -->
-    <div class="relative inline-flex items-center justify-center cursor-pointer group">
-      <!-- L'étoile tourne sur elle-même en continu + effet grossissant au survol -->
-      <Star15 className="w-16 h-16 drop-shadow-[3px_3px_0px_#000000] animate-spin-slow transition-transform duration-300 group-hover:scale-110" color="#5294FF" stroke="black" strokeWidth={3} />
-      <!-- L'icône reste fixe au centre -->
+    <div class="relative inline-flex items-center justify-center cursor-pointer group drop-shadow-[3px_3px_0px_#000000] transition-transform duration-300 hover:scale-110">
+<div class="transition-transform duration-700 ease-in-out group-hover:rotate-[360deg]">
+          <Star15 className="w-16 h-16" color="#5294FF" stroke="black" strokeWidth={3} />
+      </div>
       <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
         <Figma class="w-7 h-7 text-white" />
       </div>
     </div>
   
     <!-- 2. Notion -->
-    <div class="relative inline-flex items-center justify-center cursor-pointer group">
-      <Star15 className="w-16 h-16 drop-shadow-[3px_3px_0px_#000000] animate-spin-reverse transition-transform duration-300 group-hover:scale-110" color="#5294FF" stroke="black" strokeWidth={3} />
+    <div class="relative inline-flex items-center justify-center cursor-pointer group drop-shadow-[3px_3px_0px_#000000] transition-transform duration-300 hover:scale-110">
+<div class="transition-transform duration-700 ease-in-out group-hover:rotate-[360deg]">
+          <Star15 className="w-16 h-16" color="#5294FF" stroke="black" strokeWidth={3} />
+      </div>
       <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
         <Notion class="w-7 h-7 text-white" />
       </div>
     </div>
 
     <!-- 3. Vue -->
-    <div class="relative inline-flex items-center justify-center cursor-pointer group">
-      <Star15 className="w-16 h-16 drop-shadow-[3px_3px_0px_#000000] animate-spin-slow transition-transform duration-300 group-hover:scale-110" color="#5294FF" stroke="black" strokeWidth={3} />
+    <div class="relative inline-flex items-center justify-center cursor-pointer group drop-shadow-[3px_3px_0px_#000000] transition-transform duration-300 hover:scale-110">
+<div class="transition-transform duration-700 ease-in-out group-hover:rotate-[360deg]">
+          <Star15 className="w-16 h-16" color="#5294FF" stroke="black" strokeWidth={3} />
+      </div>
       <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
         <Vue class="w-7 h-7 text-white" />
       </div>
     </div>
 
     <!-- 4. Tailwind -->
-    <div class="relative inline-flex items-center justify-center cursor-pointer group">
-      <Star15 className="w-16 h-16 drop-shadow-[3px_3px_0px_#000000] animate-spin-reverse transition-transform duration-300 group-hover:scale-110" color="#5294FF" stroke="black" strokeWidth={3} />
+    <div class="relative inline-flex items-center justify-center cursor-pointer group drop-shadow-[3px_3px_0px_#000000] transition-transform duration-300 hover:scale-110">
+<div class="transition-transform duration-700 ease-in-out group-hover:rotate-[360deg]">
+          <Star15 className="w-16 h-16" color="#5294FF" stroke="black" strokeWidth={3} />
+      </div>
       <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
         <Tailwind class="w-7 h-7 text-white" />
       </div>
     </div>
 
     <!-- 5. Github -->
-    <div class="relative inline-flex items-center justify-center cursor-pointer group">
-      <Star15 className="w-16 h-16 drop-shadow-[3px_3px_0px_#000000] animate-spin-slow transition-transform duration-300 group-hover:scale-110" color="#5294FF" stroke="black" strokeWidth={3} />
+    <div class="relative inline-flex items-center justify-center cursor-pointer group drop-shadow-[3px_3px_0px_#000000] transition-transform duration-300 hover:scale-110">
+<div class="transition-transform duration-700 ease-in-out group-hover:rotate-[360deg]">
+          <Star15 className="w-16 h-16" color="#5294FF" stroke="black" strokeWidth={3} />
+      </div>
       <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
         <Github class="w-7 h-7 text-white" />
       </div>

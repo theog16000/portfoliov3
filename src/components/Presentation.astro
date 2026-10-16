@@ -1,3 +1,4 @@
+
 ---
 import { Instagram, Linkedin, Github, Mail } from "lucide-astro";
 import Star40 from "./stars/Star40";
@@ -6,13 +7,15 @@ import Star40 from "./stars/Star40";
 <section class="border-2 border-black bg-[#F4EFEA] p-4 shadow-[4px_4px_0px_#000000] mx-auto flex flex-col justify-between max-w-sm w-full">
   <!-- En-tête -->
   <div>
-    <p class="font-mono font-black text-xs tracking-wider">HELLO. I'M THEO</p>
-    
-    <!-- Titres avec contour et ombre portée -->
+    <p class="font-mono font-black text-xs tracking-wider">
+      HELLO. I'M THEO
+    </p>
+
     <div class="mt-1 leading-none">
-      <h1 class="font-dela text-3xl font-black uppercase text-[#F4EFEA] drop-shadow-[2px_2px_0px_#000000] [text-shadow:_2px_2px_0_#000,_-1px_-1px_0_#000,_1px_-1px_0_#000,_-1px_1px_0_#000,_2px_2px_0_#000]" >
+      <h1 class="font-dela text-3xl font-black uppercase text-[#F4EFEA] drop-shadow-[2px_2px_0px_#000000] [text-shadow:_2px_2px_0_#000,_-1px_-1px_0_#000,_1px_-1px_0_#000,_-1px_1px_0_#000,_2px_2px_0_#000]">
         WEB <span class="text-[#FF6B6B] drop-shadow-[2px_2px_0px_#000000]">DESIGNER</span>
       </h1>
+
       <h1 class="font-dela text-3xl font-black uppercase text-[#F4EFEA] drop-shadow-[2px_2px_0px_#000000] [text-shadow:_2px_2px_0_#000,_-1px_-1px_0_#000,_1px_-1px_0_#000,_-1px_1px_0_#000,_2px_2px_0_#000]">
         & <span class="text-[#7DD8EC] drop-shadow-[2px_2px_0px_#000000]">DEVELOPER</span>
       </h1>
@@ -24,54 +27,84 @@ import Star40 from "./stars/Star40";
     </p>
   </div>
 
-  <!-- Barre inférieure : Bouton + Icônes -->
+  <!-- Barre inférieure -->
   <div class="mt-4 flex items-center justify-between gap-2">
-    <!-- Bouton statut -->
+
+    <!-- Bouton READY TO WORK -->
     <a
       href="#contact"
-      class="flex items-center gap-1.5 bg-[#FBD74B] border-2 border-black px-3 py-1.5 shadow-[2px_2px_0px_#000000] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition-all font-mono font-bold text-[11px]"
+      class="group flex items-center gap-1.5 bg-[#FBD74B] border-2 border-black px-3 py-1.5 shadow-[2px_2px_0px_#000000] transition-all duration-200 hover:-translate-y-1 hover:shadow-[4px_5px_0px_#000000] hover:bg-[#ffe36b] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none font-mono font-bold text-[11px]"
     >
-      <Star40 color="#5294FF" stroke="black" strokeWidth={10} width={15} height={15} client:load />
-      <span class=>READY TO WORK</span>
-      <Star40 color="#5294FF" stroke="black" strokeWidth={10} width={15} height={15} client:load />
+      <Star40
+        color="#5294FF"
+        stroke="black"
+        strokeWidth={10}
+        width={15}
+        height={15}
+        client:load
+        className="transition-transform duration-500 group-hover:rotate-[180deg]"
+      />
+
+      <span class="transition-transform duration-200 group-hover:scale-105">
+        READY TO WORK
+      </span>
+
+      <Star40
+        color="#5294FF"
+        stroke="black"
+        strokeWidth={10}
+        width={15}
+        height={15}
+        client:load
+        className="transition-transform duration-500 group-hover:-rotate-[180deg]"
+      />
     </a>
 
     <!-- Réseaux sociaux -->
     <div class="flex items-center gap-1.5">
+
+      <!-- Instagram -->
       <a
         href="https://instagram.com"
         target="_blank"
+        rel="noopener noreferrer"
         aria-label="Instagram"
-        class="flex items-center justify-center w-8 h-8 border-2 border-black bg-white shadow-[2px_2px_0px_#000000] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition-all"
+        class="group flex items-center justify-center w-8 h-8 border-2 border-black bg-white shadow-[2px_2px_0px_#000000] transition-all duration-200 hover:-translate-y-1 hover:rotate-[-6deg] hover:bg-[#F9B5D0] hover:shadow-[4px_5px_0px_#000000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
       >
-        <Instagram class="w-4 h-4 stroke-[2.5]" />
+        <Instagram class="w-4 h-4 stroke-[2.5] transition-transform duration-300 group-hover:rotate-[15deg] group-hover:scale-110" />
       </a>
 
+      <!-- LinkedIn -->
       <a
         href="https://linkedin.com"
         target="_blank"
+        rel="noopener noreferrer"
         aria-label="LinkedIn"
-        class="flex items-center justify-center w-8 h-8 border-2 border-black bg-white shadow-[2px_2px_0px_#000000] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition-all"
+        class="group flex items-center justify-center w-8 h-8 border-2 border-black bg-white shadow-[2px_2px_0px_#000000] transition-all duration-200 hover:-translate-y-1 hover:rotate-[6deg] hover:bg-[#7DD8EC] hover:shadow-[4px_5px_0px_#000000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
       >
-        <Linkedin class="w-4 h-4 stroke-[2.5]" />
+        <Linkedin class="w-4 h-4 stroke-[2.5] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110" />
       </a>
 
+      <!-- GitHub -->
       <a
         href="https://github.com"
         target="_blank"
+        rel="noopener noreferrer"
         aria-label="GitHub"
-        class="flex items-center justify-center w-8 h-8 border-2 border-black bg-white shadow-[2px_2px_0px_#000000] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition-all"
+        class="group flex items-center justify-center w-8 h-8 border-2 border-black bg-white shadow-[2px_2px_0px_#000000] transition-all duration-200 hover:-translate-y-1 hover:rotate-[-6deg] hover:bg-[#D6D3D1] hover:shadow-[4px_5px_0px_#000000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
       >
-        <Github class="w-4 h-4 stroke-[2.5]" />
+        <Github class="w-4 h-4 stroke-[2.5] transition-transform duration-300 group-hover:rotate-[15deg] group-hover:scale-110" />
       </a>
 
+      <!-- Email -->
       <a
         href="mailto:contact@example.com"
         aria-label="Email"
-        class="flex items-center justify-center w-8 h-8 border-2 border-black bg-white shadow-[2px_2px_0px_#000000] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition-all"
+        class="group flex items-center justify-center w-8 h-8 border-2 border-black bg-white shadow-[2px_2px_0px_#000000] transition-all duration-200 hover:-translate-y-1 hover:rotate-[6deg] hover:bg-[#FBD74B] hover:shadow-[4px_5px_0px_#000000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
       >
-        <Mail class="w-4 h-4 stroke-[2.5]" />
+        <Mail class="w-4 h-4 stroke-[2.5] transition-transform duration-300 group-hover:scale-125 group-hover:-rotate-[10deg]" />
       </a>
+
     </div>
   </div>
 </section>
