@@ -1,6 +1,7 @@
 ---
 import Bouton from "./Bouton.jsx";
 import { House, User, BriefcaseBusiness, Github, Linkedin } from 'lucide-astro';
+import Star33 from "./stars/Star33";
 
 const links = [
   { href: '/', label: 'Accueil', num: '01', icon: House, curtain: '#FBE38E' },
@@ -28,14 +29,18 @@ const links = [
     id="mobile-drawer"
     class="hidden fixed inset-0 bg-[#F4EFEA] z-[60] flex flex-col"
   >
-    <!-- Bandeau défilant -->
+    <!-- Bandeau défilant avec étoiles bien alignées et dimensionnées -->
     <div class="relative overflow-hidden border-b-2 border-black bg-black py-2 shrink-0">
-      <div class="flex whitespace-nowrap">
-        <span class="animate-marquee shrink-0 font-mono font-black text-sm uppercase tracking-widest text-white pr-8">
-          ★ MENU ★ NAVIGATION ★ EXPLORE ★ MENU ★ NAVIGATION ★ EXPLORE
+      <div class="flex whitespace-nowrap items-center">
+        <span class="animate-marquee shrink-0 font-mono font-black text-sm uppercase tracking-widest text-white pr-8 flex items-center gap-3">
+          <Star33 size={16} color="#7DD8EC" stroke="black" strokeWidth={3} /> MENU 
+          <Star33 size={16} color="#FBD74B" stroke="black" strokeWidth={3} /> NAVIGATION 
+          <Star33 size={16} color="#FF6B6B" stroke="black" strokeWidth={3} /> EXPLORE
         </span>
-        <span class="animate-marquee shrink-0 font-mono font-black text-sm uppercase tracking-widest text-white pr-8" aria-hidden="true">
-          ★ MENU ★ NAVIGATION ★ EXPLORE ★ MENU ★ NAVIGATION ★ EXPLORE
+        <span class="animate-marquee shrink-0 font-mono font-black text-sm uppercase tracking-widest text-white pr-8 flex items-center gap-3" aria-hidden="true">
+          <Star33 size={16} color="#7DD8EC" stroke="black" strokeWidth={3} /> MENU 
+          <Star33 size={16} color="#FBD74B" stroke="black" strokeWidth={3} /> NAVIGATION 
+          <Star33 size={16} color="#FF6B6B" stroke="black" strokeWidth={3} /> EXPLORE
         </span>
       </div>
     </div>
@@ -64,7 +69,7 @@ const links = [
 
     <!-- Bas : CTA + réseaux sociaux -->
     <div class="shrink-0 px-5 pb-6 pt-2 flex flex-col gap-3 border-t-2 border-black/15">
-      <Bouton href="/contact" className="w-full text-center" client:load />
+      <Bouton href="/contact" className="w-full text-center" client:load>Contact</Bouton>
 
       <div class="flex gap-2">
         <a

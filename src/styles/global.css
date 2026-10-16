@@ -129,7 +129,59 @@
 }
 
 .text-outline {
-  -webkit-text-stroke: 3px #000;
-  paint-order: stroke fill;
-  text-shadow: 4px 4px 0px #000;
+  /* On simule un contour "outside" très marqué et net avec plusieurs text-shadow dans toutes les directions */
+  text-shadow: 
+    -3px -3px 0 #000,
+     3px -3px 0 #000,
+    -3px  3px 0 #000,
+     3px  3px 0 #000,
+    -3px  0px 0 #000,
+     3px  0px 0 #000,
+     0px -3px 0 #000,
+     0px  3px 0 #000,
+    /* Et on ajoute l'ombre décalée en bas à droite (style neobrutaliste) */
+    4px 4px 0px #000;
+}
+
+@layer utilities {
+  /* Animation de rotation continue sur 360 degrés */
+  @keyframes spin-slow {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 12s linear infinite;
+  }
+
+  /* Variante un peu plus rapide ou inversée si besoin */
+  @keyframes spin-reverse {
+    from {
+      transform: rotate(360deg);
+    }
+    to {
+      transform: rotate(0deg);
+    }
+  }
+
+  .animate-spin-reverse {
+    animation: spin-reverse 15s linear infinite;
+  }
+}
+
+@theme {
+  --animate-marquee: marquee 20s linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
 }

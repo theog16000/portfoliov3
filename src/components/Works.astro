@@ -1,0 +1,37 @@
+---
+import { getCollection } from 'astro:content';
+
+const allWorks = await getCollection('works');
+const sortedWorks = allWorks.sort((a: any, b: any) => a.data.order - b.data.order);
+---
+
+<div class="border-[3px] border-black bg-white p-6 shadow-[4px_4px_0px_#000000] w-full max-w-md mx-auto my-6">
+    
+    <!-- Titre WORKS -->
+    <h2 class="text-2xl font-dela mb-6 uppercase text-black tracking-[-0.011em]">
+        WORKS
+    </h2>
+
+    <!-- Conteneur avec scroll horizontal -->
+    <div class="flex gap-4 overflow-x-auto pb-4 mb-4 scrollbar-thin">
+        {sortedWorks.map((work: any) => (
+            <div class="border-[3px] border-black bg-[#F5F5F5] p-4 shadow-[3px_3px_0px_#000000] flex flex-col gap-2 min-w-[240px] w-[240px] shrink-0">
+                <div class="h-28 bg-gray-300 border-[2px] border-black w-full overflow-hidden">
+                    {work.data.image && (
+                        <img src={work.data.image} alt={work.data.title} class="w-full h-full object-cover" />
+                    )}
+                </div>
+                <h3 class="font-dela text-sm uppercase truncate">{work.data.title}</h3>
+                <p class="text-xs text-gray-600 line-clamp-2">{work.data.description}</p>
+            </div>
+        ))}
+    </div>
+
+    <!-- Bouton VIEW MORE aligné à droite -->
+    <div class="flex justify-end">
+        <a href="/projets" class="border-[3px] border-black bg-[#A3D8E2] px-4 py-2 font-dela text-xs uppercase shadow-[3px_3px_0px_#000000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none transition-all">
+            VIEW MORE
+        </a>
+    </div>
+
+</div>
