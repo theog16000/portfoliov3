@@ -1,6 +1,6 @@
 ---
 title: Hypnomelia
-description: Complète overhaul of a hypnotherapist’s website
+description: Complete overhaul of a hypnotherapist’s website
 category: Web Creation
 tags:
   - development
