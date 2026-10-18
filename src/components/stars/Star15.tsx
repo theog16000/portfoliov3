@@ -20,7 +20,7 @@ export default function Star15({
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        fill="#A3D8E2"
+        fill="none"
         viewBox="0 0 200 200"
         width={size ?? width}
         height={size ?? height}

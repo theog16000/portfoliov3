@@ -1,4 +1,3 @@
-
 ---
 import Star40 from './stars/Star40';
 ---
@@ -6,29 +5,33 @@ import Star40 from './stars/Star40';
 <section class="bg-[#7DFFB3] w-screen relative left-1/2 -translate-x-1/2 flex flex-row justify-center items-center h-32 my-6 overflow-hidden">
   <div class="w-full max-w-7xl px-6 flex justify-between items-center whitespace-nowrap">
 
-    <!-- Étoile gauche : rotation continue -->
-    <div class="animate-[spin_8s_linear_infinite]">
-      <Star40
-        size={30}
-        color="#FF94B9"
-        stroke="black"
-        strokeWidth={10}
-      />
+    <!-- Étoile gauche (avec une largeur fixe pour équilibrer la droite) -->
+    <div class="w-12 flex justify-start">
+      <div class="animate-[spin_8s_linear_infinite]">
+        <Star40
+          size={30}
+          color="#FF94B9"
+          stroke="black"
+          strokeWidth={10}
+        />
+      </div>
     </div>
 
-    <!-- Titre -->
-    <h2 class="text-xl font-dela tracking-[-0.011em]">
+    <!-- Titre (centré) -->
+    <h2 class="text-xl font-dela tracking-[-0.011em] text-center flex-1">
       PERSONAL PORTFOLIO
     </h2>
 
-    <!-- Étoile droite : rotation inverse -->
-    <div class="animate-[spin_8s_linear_infinite_reverse]">
-      <Star40
-        size={30}
-        color="#FF94B9"
-        stroke="black"
-        strokeWidth={10}
-      />
+    <!-- Étoile droite (même largeur fixe que la gauche) -->
+    <div class="w-12 flex justify-end">
+      <div class="animate-[spin_8s_linear_infinite_reverse]">
+        <Star40
+          size={30}
+          color="#FF94B9"
+          stroke="black"
+          strokeWidth={10}
+        />
+      </div>
     </div>
 
   </div>

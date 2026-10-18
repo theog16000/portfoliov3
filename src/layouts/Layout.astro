@@ -94,6 +94,23 @@ const { title = "Mon Projet" } = Astro.props;
     </style>
   </head>
   <body class="min-h-screen bg-bg text-text flex flex-col overflow-x-hidden">
+
+    <!-- 📱 OVERLAY BUREAU : Bloque l'accès et s'affiche uniquement sur Desktop (md et plus) -->
+    <div class="hidden md:flex fixed inset-0 z-[99999] bg-[#7DFFB3] items-center justify-center p-6">
+      <div class="border-[4px] border-black bg-[#F4EFEA] p-8 shadow-[8px_8px_0px_#000000] max-w-lg text-center">
+        <h1 class="font-dela text-2xl uppercase mb-4">
+          SITE EN COURS DE DÉVELOPPEMENT
+        </h1>
+        <p class="font-medium text-sm md:text-base mb-6 text-gray-800">
+          Ce portfolio est actuellement optimisé et accessible <strong>uniquement sur téléphone mobile</strong> pour le moment.
+        </p>
+        <span class="text-xs font-bold uppercase bg-[#FF94B9] border-2 border-black py-2 px-4 inline-block shadow-[2px_2px_0px_#000000]">
+          Ouvrez le lien depuis votre smartphone
+        </span>
+      </div>
+    </div>
+
+    <!-- Rideau de transition -->
     <div id="curtain-wrapper" class="pointer-events-none">
       <div id="curtain-shadow" aria-hidden="true"></div>
       <div id="curtain-main" aria-hidden="true">
@@ -105,7 +122,7 @@ const { title = "Mon Projet" } = Astro.props;
 
     <Header />
 
-    <main class="flex-1 max-w-6xl w-full mx-auto  pt-24">
+    <main class="flex-1 max-w-6xl w-full mx-auto pt-24">
       <slot />
     </main>
   </body>

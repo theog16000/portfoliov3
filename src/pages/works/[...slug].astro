@@ -1,0 +1,97 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const works = await getCollection('works');
+  return works.map((work) => {
+    const id = work.id.replace(/\.md$/, '');
+    return {
+      params: { slug: id },
+      props: { work },
+    };
+  });
+}
+
+const { work } = Astro.props;
+
+if (!work) {
+  return Astro.redirect('/404');
+}
+
+const { Content } = await render(work);
+---
+
+<Layout title={work.data.title}>
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 pt-28 pb-16">
+    
+    <!-- Bouton Retour -->
+    <a 
+      href="/projets" 
+      class="inline-flex items-center gap-2 mb-8 font-dela text-xs border-[3px] border-black bg-[#F5F5F5] px-4 py-2 shadow-[3px_3px_0px_#000000] hover:bg-[#FF94B9] transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 uppercase"
+    >
+      ← RETOUR AUX PROJETS
+    </a>
+
+    <!-- Carte Fiche Projet -->
+    <article class="border-[3px] border-black bg-[#F4EFEA] p-6 md:p-8 shadow-[6px_6px_0px_#000000]">
+      
+      <!-- Badges / Catégorie & Tags -->
+      <div class="flex flex-wrap gap-2 mb-6">
+        {work.data.category && (
+          <span class="text-xs font-bold border-2 border-black bg-[#FF94B9] px-3 py-1 shadow-[2px_2px_0px_#000000] uppercase">
+            {work.data.category}
+          </span>
+        )}
+        {work.data.tags?.map((tag: string) => (
+          <span class="text-xs font-bold border-2 border-black bg-[#7DFFB3] px-3 py-1 shadow-[2px_2px_0px_#000000] uppercase">
+            {tag}
+          </span>
+        ))}
+      </div>
+
+      <!-- Titre du projet -->
+      <h1 class="font-dela text-3xl md:text-5xl uppercase tracking-tight mb-4">
+        {work.data.title}
+      </h1>
+
+      <!-- Description courte -->
+      {work.data.description && (
+        <p class="text-base md:text-lg font-medium text-gray-800 mb-6 border-l-4 border-black pl-4">
+          {work.data.description}
+        </p>
+      )}
+
+      <!-- Image / Mockup principal -->
+      {work.data.image && (
+        <div class="border-[3px] border-black h-64 md:h-[400px] w-full overflow-hidden mb-8 shadow-[4px_4px_0px_#000000] bg-gray-200">
+          <img 
+            src={work.data.image} 
+            alt={work.data.title} 
+            class="w-full h-full object-cover" 
+          />
+        </div>
+      )}
+
+      <!-- Contenu rédigé en Markdown (.md) -->
+      <div class="prose prose-lg max-w-none font-medium text-gray-800 mb-8 border-t-2 border-black pt-6">
+        <Content />
+      </div>
+
+      <!-- Lien externe (Visiter le site) -->
+      {work.data.link && (
+        <div class="pt-4 border-t-2 border-black flex justify-start">
+          <a 
+            href={work.data.link} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="inline-block font-dela text-xs md:text-sm border-[3px] border-black bg-[#A3D8E2] px-6 py-3 shadow-[4px_4px_0px_#000000] hover:bg-[#FF94B9] transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 uppercase"
+          >
+            VISITER LE SITE ➔
+          </a>
+        </div>
+      )}
+
+    </article>
+  </section>
+</Layout>

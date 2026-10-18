@@ -1,8 +1,136 @@
 ---
-import Layout from "./../layouts/Layout.astro";
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+// 1. Récupération dynamique de la collection 'works'
+const allWorks = await getCollection('works');
+
+// Tri par ordre si défini, sinon conserve l'ordre par défaut
+const sortedWorks = allWorks.sort((a, b) => (a.data.order || 0) - (b.data.order || 0));
+
+// 2. Extraire dynamiquement les catégories uniques depuis le frontmatter de tes .md
+const rawCategories = sortedWorks.map(work => work.data.category).filter(Boolean);
+const categories = ['ALL', ...new Set(rawCategories)];
 ---
 
 <Layout title="Projets">
-  <h1 class="text-3xl font-black uppercase">Projets</h1>
-  <p class="mt-4">Page de test pour voir l'animation de transition.</p>
+  <section class="max-w-6xl mx-auto px-6 pt-28 pb-16">
+    
+    <!-- En-tête / Hero Section -->
+    <div class="border-[3px] border-black bg-[#F4EFEA] p-6 shadow-[4px_4px_0px_#000000] mb-10 text-center">
+      <h1 class="font-dela text-3xl md:text-5xl uppercase tracking-[-0.011em]">
+        MY <span class="bg-[#7DFFB3] px-2 border-2 border-black">PROJECTS</span>
+      </h1>
+      <p class="mt-2 text-sm md:text-base font-medium text-gray-700">
+        Découvrez l'ensemble de mes réalisations et projets.
+      </p>
+    </div>
+
+    <!-- Filtres dynamiques -->
+    <div class="flex flex-wrap justify-center gap-3 mb-12">
+      {categories.map((category, index) => (
+        <button
+          data-filter={category.toLowerCase()}
+          class={`filter-btn px-5 py-2 text-xs md:text-sm font-dela border-[3px] border-black shadow-[3px_3px_0px_#000000] transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[5px_5px_0px_#000000] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none uppercase cursor-pointer ${
+            index === 0 ? "bg-[#FF94B9]" : "bg-[#F5F5F5]"
+          }`}
+        >
+          {category}
+        </button>
+      ))}
+    </div>
+
+    <!-- Grille des Projets -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {sortedWorks.map((work) => {
+        const category = work.data.category ? work.data.category.toLowerCase() : 'uncategorized';
+        const workSlug = (work.id || work.slug).replace(/\.md$/, '');
+
+        return (
+          <article
+            data-category={category}
+            class="project-card border-[3px] border-black bg-[#F5F5F5] p-4 shadow-[4px_4px_0px_#000000] flex flex-col justify-between"
+          >
+            <div>
+              <!-- Aperçu de l'image -->
+              <div class="h-44 bg-gray-300 border-[2px] border-black w-full overflow-hidden mb-4">
+                {work.data.image ? (
+                  <img src={work.data.image} alt={work.data.title} class="w-full h-full object-cover" />
+                ) : (
+                  <div class="w-full h-full flex items-center justify-center text-xs font-dela bg-[#A3D8E2]">
+                    NO IMAGE
+                  </div>
+                )}
+              </div>
+
+              <!-- Titre -->
+              <h3 class="font-dela text-lg uppercase mb-2 truncate">
+                {work.data.title}
+              </h3>
+
+              <!-- Description -->
+              {work.data.description && (
+                <p class="text-xs text-gray-700 line-clamp-3 mb-4">
+                  {work.data.description}
+                </p>
+              )}
+
+              <!-- Badges / Tags -->
+              {work.data.tags && work.data.tags.length > 0 && (
+                <div class="flex flex-wrap gap-2 mb-4">
+                  {work.data.tags.map((tag: string) => (
+                    <span class="text-[10px] font-bold border border-black bg-[#7DFFB3] px-2 py-0.5 shadow-[1px_1px_0px_#000000] uppercase">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <!-- Bouton d'action / Lien unique par carte -->
+            <a 
+              href={`/works/${workSlug}`}
+              class="w-full text-center font-dela text-xs border-[2px] border-black bg-[#A3D8E2] py-2 shadow-[2px_2px_0px_#000000] hover:bg-[#FF94B9] transition-colors uppercase block mt-2"
+            >
+              VIEW PROJECT ➔
+            </a>
+          </article>
+        );
+      })}
+    </div>
+
+  </section>
+
+  <!-- Script côté client pour le filtrage -->
+  <script>
+    document.addEventListener('astro:page-load', initFilters);
+    document.addEventListener('DOMContentLoaded', initFilters);
+
+    function initFilters() {
+      const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+      const cards = document.querySelectorAll<HTMLElement>('.project-card');
+
+      buttons.forEach(button => {
+        button.addEventListener('click', () => {
+          const filter = button.getAttribute('data-filter');
+
+          buttons.forEach(btn => {
+            btn.classList.remove('bg-[#FF94B9]');
+            btn.classList.add('bg-[#F5F5F5]');
+          });
+          button.classList.add('bg-[#FF94B9]');
+          button.classList.remove('bg-[#F5F5F5]');
+
+          cards.forEach(card => {
+            const category = card.getAttribute('data-category');
+            if (filter === 'all' || category === filter) {
+              card.style.display = 'flex';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+    }
+  </script>
 </Layout>
