@@ -10,4 +10,4 @@ tags:
 link: https://hypnomelia.fr
 order: 1
 ---
-Incomplet
+**Refonte complète d'un site d'un praticien en hypnose**
