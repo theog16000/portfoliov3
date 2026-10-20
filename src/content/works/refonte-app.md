@@ -1,10 +1,13 @@
 ---
-title: "Refonte App SaaS"
-description: "Création d'une interface utilisateur néobrutaliste complète."
-image: "/images/work1.png"
-category: "Code"
-tags: ["UI/UX", "Tailwind", "Astro"]
-link: "https://example.com"
+title: "Refonte App "
+description: Création d'une interface utilisateur néobrutaliste complète.
+image: /images/work1.png
+category: Code
+tags:
+  - UI/UX
+  - Tailwind
+  - Astro
+link: https://example.com
 order: 1
 ---
 
