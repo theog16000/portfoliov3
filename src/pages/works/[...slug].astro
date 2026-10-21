@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection, render } from 'astro:content';
+import { withBase } from '../../utils/site';
 
 export async function getStaticPaths() {
   const works = await getCollection('works');
@@ -22,21 +23,22 @@ if (!work) {
 const { Content } = await render(work);
 ---
 
-<Layout title={work.data.title}>
-  <section class="max-w-4xl mx-auto px-4 sm:px-6 pt-28 pb-16">
+<Layout title={`${work.data.title} — Théo Genty`}>
+  <section class="project-detail page-arrive">
+    <div class="detail-kicker"><span>PROJECT FILE</span><span>03 / 04</span></div>
     
-    <!-- Bouton Retour -->
+    <!-- Back link -->
     <a 
-      href="/projets" 
-      class="inline-flex items-center gap-2 mb-8 font-dela text-xs border-[3px] border-black bg-[#F5F5F5] px-4 py-2 shadow-[3px_3px_0px_#000000] hover:bg-[#FF94B9] transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 uppercase"
+      href={withBase("/projets")}
+      class="detail-back inline-flex items-center gap-2 mb-5 font-mono text-xs border border-black bg-white px-3 py-2 transition-colors hover:bg-[#FF94B9] uppercase"
     >
-      ← RETOUR AUX PROJETS
+      ← BACK TO PROJECTS
     </a>
 
-    <!-- Carte Fiche Projet -->
-    <article class="border-[3px] border-black bg-[#F4EFEA] p-6 md:p-8 shadow-[6px_6px_0px_#000000]">
+    <!-- Project details -->
+    <article class="detail-card">
       
-      <!-- Badges / Catégorie & Tags -->
+      <!-- Category and tags -->
       <div class="flex flex-wrap gap-2 mb-6">
         {work.data.category && (
           <span class="text-xs font-bold border-2 border-black bg-[#FF94B9] px-3 py-1 shadow-[2px_2px_0px_#000000] uppercase">
@@ -50,44 +52,44 @@ const { Content } = await render(work);
         ))}
       </div>
 
-      <!-- Titre du projet -->
-      <h1 class="font-dela text-3xl md:text-5xl uppercase tracking-tight mb-4">
+      <!-- Project title -->
+      <h1 class="detail-title">
         {work.data.title}
       </h1>
 
-      <!-- Description courte -->
+      <!-- Short description -->
       {work.data.description && (
-        <p class="text-base md:text-lg font-medium text-gray-800 mb-6 border-l-4 border-black pl-4">
+        <p class="detail-description">
           {work.data.description}
         </p>
       )}
 
-      <!-- Image / Mockup principal -->
+      <!-- Main image / mockup -->
       {work.data.image && (
-        <div class="border-[3px] border-black h-64 md:h-[400px] w-full overflow-hidden mb-8 shadow-[4px_4px_0px_#000000] bg-gray-200">
+        <div class="detail-image">
           <img 
-            src={work.data.image} 
+            src={withBase(work.data.image)}
             alt={work.data.title} 
             class="w-full h-full object-cover" 
           />
         </div>
       )}
 
-      <!-- Contenu rédigé en Markdown (.md) -->
-      <div class="prose prose-lg max-w-none font-medium text-gray-800 mb-8 border-t-2 border-black pt-6">
+      <!-- Markdown project content -->
+      <div class="prose prose-lg max-w-none font-medium text-gray-800 mb-8 border-t border-black pt-5">
         <Content />
       </div>
 
-      <!-- Lien externe (Visiter le site) -->
+      <!-- External project link -->
       {work.data.link && (
         <div class="pt-4 border-t-2 border-black flex justify-start">
           <a 
             href={work.data.link} 
             target="_blank" 
             rel="noopener noreferrer"
-            class="inline-block font-dela text-xs md:text-sm border-[3px] border-black bg-[#A3D8E2] px-6 py-3 shadow-[4px_4px_0px_#000000] hover:bg-[#FF94B9] transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 uppercase"
+            class="detail-visit inline-block font-mono text-xs border border-black bg-[#A3D8E2] px-4 py-3 transition-colors hover:bg-[#FF94B9] uppercase"
           >
-            VISITER LE SITE ➔
+            VISIT THE WEBSITE ➔
           </a>
         </div>
       )}
@@ -95,3 +97,68 @@ const { Content } = await render(work);
     </article>
   </section>
 </Layout>
+
+<style>
+  .project-detail {
+    padding-bottom: 1rem;
+  }
+
+  .detail-kicker {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.2rem 0 0.8rem;
+    font-family: "Space Mono", monospace;
+    font-size: 0.55rem;
+    font-weight: 700;
+  }
+
+  .detail-back {
+    color: #151515;
+    text-decoration: none;
+  }
+
+  .detail-card {
+    border: 1.5px solid #151515;
+    background: #fffdfa;
+    padding: 1rem;
+    box-shadow: 4px 4px 0 #151515;
+  }
+
+  .detail-title {
+    margin-bottom: 0.8rem;
+    font-family: "Dela Gothic One", sans-serif;
+    font-size: clamp(2rem, 10vw, 3rem);
+    line-height: 1;
+    letter-spacing: -0.06em;
+    text-transform: uppercase;
+  }
+
+  .detail-description {
+    margin-bottom: 1.2rem;
+    border-left: 3px solid #ff6b6b;
+    padding-left: 0.75rem;
+    color: #343434;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .detail-image {
+    width: 100%;
+    height: 13rem;
+    overflow: hidden;
+    margin-bottom: 1.3rem;
+    border: 1px solid #151515;
+    background: #a3d8e2;
+  }
+
+  .detail-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .detail-visit {
+    color: #151515;
+    text-decoration: none;
+  }
+</style>

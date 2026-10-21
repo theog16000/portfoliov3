@@ -1,11 +1,11 @@
 ---
-title: "Refonte App SaaS"
-description: "Création d'une interface utilisateur néobrutaliste complète."
+title: "SaaS App Redesign"
+description: "A complete neo-brutalist user interface."
 image: "/images/work1.png"
 tags: ["UI/UX", "Tailwind", "Astro"]
-category : "Visual"
+category : "Visual Design"
 link: "https://example.com"
 order: 3
 ---
 
-Ici, vous pouvez mettre des détails supplémentaires sur le projet si vous le souhaitez.
+Add more project details here.

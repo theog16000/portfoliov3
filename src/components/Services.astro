@@ -1,36 +1,80 @@
 ---
-
+const services = [
+  "Web design",
+  "Front-end development",
+  "Responsive experiences",
+  "UI / UX",
+  "Performance & SEO",
+];
 ---
 
-<section class="border-2 border-black bg-[#F4EFEA] p-4 shadow-[4px_4px_0px_#000000] mx-auto flex flex-col justify-between max-w-sm w-full">
-  <h1 class="font-dela text-3xl text-[#F4EFEA] tracking-[-0.011em] text-outline">
-    SERVICES
-    </h1>
+<section class="services page-arrive">
+  <div class="section-heading">
+    <span>02 / WHAT I DO</span>
+    <h2>GOOD<br />STUFF.</h2>
+  </div>
+  <ol>
+    {services.map((service, index) => (
+      <li>
+        <span>0{index + 1}</span>
+        <strong>{service}</strong>
+        <span aria-hidden="true">↗</span>
+      </li>
+    ))}
+  </ol>
+</section>
 
-    <div class="mt-5 flex flex-col justify-center items-center">
+<style>
+  .services {
+    margin-top: 3.4rem;
+    border: 1.5px solid #151515;
+    background: #d9cafa;
+    padding: 1rem;
+    box-shadow: 4px 4px 0 #151515;
+  }
 
-        <button class="border-[3px] border-black bg-[#A3D8E2] w-70 p-4 text-center font-dela text-sm uppercase shadow-[3px_3px_0px_#000000] tracking-[-0.011em] cursor-pointer transition-transform hover:-translate-y-0.5 mt-2">
-            WEB DEVELOPMENT
-        </button>
+  .section-heading {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.1rem;
+  }
 
-        <button class="border-[3px] border-black bg-[#FBE38E] p-4 w-70 text-center font-dela text-sm uppercase shadow-[3px_3px_0px_#000000] tracking-[-0.011em] cursor-pointer transition-transform hover:-translate-y-0.5 mt-2">
-            WEB DESIGN        </button>
+  .section-heading > span {
+    padding-top: 0.4rem;
+    font-family: "Space Mono", monospace;
+    font-size: 0.58rem;
+    font-weight: 700;
+  }
 
-        <button class="border-[3px] border-black bg-[#FFAAA6] p-4 w-70 text-center font-dela text-sm uppercase shadow-[3px_3px_0px_#000000] tracking-[-0.011em] cursor-pointer transition-transform hover:-translate-y-0.5 mt-2">
-            RESPONSIVE MOBILE
-        </button>
+  .section-heading h2 {
+    font-family: "Dela Gothic One", sans-serif;
+    font-size: 1.8rem;
+    line-height: 0.95;
+    text-align: right;
+  }
 
-        <button class="border-[3px] border-black bg-[#7DFFB3] p-4 w-70 text-center font-dela text-sm uppercase shadow-[3px_3px_0px_#000000] tracking-[-0.011em] cursor-pointer transition-transform hover:-translate-y-0.5 mt-2">
-            UI & UX DESIGN
-        </button>
+  ol {
+    border-top: 1.5px solid #151515;
+  }
 
-        <button class="border-[3px] border-black bg-[#C4B5FD] p-4 w-70 text-center font-dela text-sm uppercase shadow-[3px_3px_0px_#000000] tracking-[-0.011em] cursor-pointer transition-transform hover:-translate-y-0.5 mt-2">
-SEO & PERFORMANCE        
-</button>
+  li {
+    display: grid;
+    min-height: 3.2rem;
+    grid-template-columns: 2rem 1fr 1rem;
+    align-items: center;
+    gap: 0.6rem;
+    border-bottom: 1px solid #15151545;
+    font-size: 0.8rem;
+  }
 
-    </div>
+  li > span:first-child {
+    font-family: "Space Mono", monospace;
+    font-size: 0.58rem;
+  }
 
-     
-
-    
-</section> 
+  li > span:last-child {
+    font-size: 1rem;
+  }
+</style>

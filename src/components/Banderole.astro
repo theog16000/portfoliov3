@@ -1,38 +1,43 @@
 ---
-import Star40 from './stars/Star40';
 ---
 
-<section class="bg-[#7DFFB3] w-screen relative left-1/2 -translate-x-1/2 flex flex-row justify-center items-center h-32 my-6 overflow-hidden">
-  <div class="w-full max-w-7xl px-4 sm:px-6 flex justify-between items-center gap-2 sm:gap-4">
-
-    <!-- Étoile gauche -->
-    <div class="w-8 sm:w-12 flex justify-start shrink-0">
-      <div class="animate-[spin_8s_linear_infinite]">
-        <Star40
-          size={30}
-          color="#FF94B9"
-          stroke="black"
-          strokeWidth={10}
-        />
-      </div>
-    </div>
-
-    <!-- Titre (réduit sur mobile pour bien espacer les 3 éléments) -->
-    <h2 class="text-sm sm:text-xl font-dela tracking-[-0.011em] text-center flex-1 break-words">
-      PERSONAL PORTFOLIO
-    </h2>
-
-    <!-- Étoile droite -->
-    <div class="w-8 sm:w-12 flex justify-end shrink-0">
-      <div class="animate-[spin_8s_linear_infinite_reverse]">
-        <Star40
-          size={30}
-          color="#FF94B9"
-          stroke="black"
-          strokeWidth={10}
-        />
-      </div>
-    </div>
-
+<div class="ticker" aria-label="Design that feels like you">
+  <div class="ticker-track" aria-hidden="true">
+    {Array.from({ length: 4 }, () => (
+      <span>MADE WITH CARE <b>✳</b> BUILT WITH INTENTION <b>✳</b></span>
+    ))}
   </div>
-</section>
+</div>
+
+<style>
+  .ticker {
+    width: calc(100% + 2rem);
+    margin: 2.5rem -1rem 0;
+    overflow: hidden;
+    border-block: 1.5px solid #151515;
+    background: #7dffb3;
+    padding: 0.9rem 0;
+  }
+
+  .ticker-track {
+    display: flex;
+    width: max-content;
+  }
+
+  .ticker-track span {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-right: 1rem;
+    white-space: nowrap;
+    font-family: "Space Mono", monospace;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .ticker-track b {
+    color: #ff6b6b;
+    font-size: 1rem;
+  }
+</style>

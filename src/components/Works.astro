@@ -1,37 +1,182 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection } from "astro:content";
+import { ArrowUpRight } from "lucide-astro";
+import { withBase } from "../utils/site";
 
-const allWorks = await getCollection('works');
-const sortedWorks = allWorks.sort((a: any, b: any) => a.data.order - b.data.order);
+const works = await getCollection("works");
+const sortedWorks = works.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
 ---
 
-<section class="border-2 border-black bg-[#F4EFEA] p-4 shadow-[4px_4px_0px_#000000] mx-auto flex flex-col justify-between max-w-sm w-full">
-    
-    <!-- Titre WORKS -->
-    <h1 class="font-dela text-3xl text-[#F4EFEA] tracking-[-0.011em] text-outline">
-    WORKS
-    </h1>
+<section id="selected-work" class="work-section page-arrive">
+  <div class="work-heading">
+    <div>
+      <span>03 / SELECTED WORK</span>
+      <h2>A FEW<br />FAVOURITES.</h2>
+    </div>
+    <a href={withBase("/projets")} aria-label="See all projects">
+      ALL WORK <ArrowUpRight size={17} />
+    </a>
+  </div>
 
-    <!-- Conteneur avec scroll horizontal -->
-    <div class="flex gap-4 overflow-x-auto pb-4 mb-4 scrollbar-thin mt-5">
-        {sortedWorks.map((work: any) => (
-            <div class="border-[3px] border-black bg-[#F5F5F5] p-4 shadow-[3px_3px_0px_#000000] flex flex-col gap-2 min-w-[240px] w-[240px] shrink-0">
-                <div class="h-28 bg-gray-300 border-[2px] border-black w-full overflow-hidden">
-                    {work.data.image && (
-                        <img src={work.data.image} alt={work.data.title} class="w-full h-full object-cover" />
-                    )}
-                </div>
-                <h3 class="font-dela text-sm uppercase truncate">{work.data.title}</h3>
-                <p class="text-xs text-gray-600 line-clamp-2">{work.data.description}</p>
+  <div class="work-list">
+    {sortedWorks.map((work, index) => {
+      const slug = work.id.replace(/\.md$/, "");
+      return (
+        <a href={withBase(`/works/${slug}`)} class="work-card">
+          <div class="work-image">
+            {work.data.image ? (
+              <img src={withBase(work.data.image)} alt={work.data.title} loading="lazy" />
+            ) : (
+              <span class="work-placeholder">0{index + 1}</span>
+            )}
+            <span class="work-index">0{index + 1}</span>
+          </div>
+          <div class="work-meta">
+            <div>
+              <span class="work-category">{work.data.category ?? "Selected work"}</span>
+              <h3>{work.data.title}</h3>
+              <p>{work.data.description}</p>
             </div>
-        ))}
-    </div>
-
-    <!-- Bouton VIEW MORE aligné à droite -->
-    <div class="flex justify-end">
-        <a href="/projets" class="border-[3px] border-black bg-[#A3D8E2] px-4 py-2 font-dela text-xs uppercase shadow-[3px_3px_0px_#000000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none transition-all">
-            VIEW MORE
+            <span class="work-arrow" aria-hidden="true"><ArrowUpRight size={20} /></span>
+          </div>
         </a>
-    </div>
-
+      );
+    })}
+  </div>
 </section>
+
+<style>
+  .work-section {
+    margin-top: 3.4rem;
+  }
+
+  .work-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .work-heading > div > span {
+    font-family: "Space Mono", monospace;
+    font-size: 0.58rem;
+    font-weight: 700;
+  }
+
+  .work-heading h2 {
+    margin-top: 0.4rem;
+    font-family: "Dela Gothic One", sans-serif;
+    font-size: 1.8rem;
+    line-height: 0.98;
+    letter-spacing: -0.06em;
+  }
+
+  .work-heading > a {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    padding-bottom: 0.2rem;
+    color: #151515;
+    font-family: "Space Mono", monospace;
+    font-size: 0.57rem;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .work-list {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .work-card {
+    display: block;
+    color: #151515;
+    text-decoration: none;
+  }
+
+  .work-image {
+    position: relative;
+    height: 12rem;
+    overflow: hidden;
+    border: 1.5px solid #151515;
+    background: #a3d8e2;
+  }
+
+  .work-card:nth-child(2n) .work-image {
+    background: #ffaaa6;
+  }
+
+  .work-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 450ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .work-card:active .work-image img {
+    transform: scale(1.04);
+  }
+
+  .work-index {
+    position: absolute;
+    top: 0.6rem;
+    left: 0.6rem;
+    border: 1px solid #151515;
+    background: #fffdfa;
+    padding: 0.25rem 0.4rem;
+    font-family: "Space Mono", monospace;
+    font-size: 0.62rem;
+    font-weight: 700;
+  }
+
+  .work-placeholder {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    place-items: center;
+    font-family: "Dela Gothic One", sans-serif;
+    font-size: 5rem;
+    -webkit-text-stroke: 1.5px #151515;
+    color: transparent;
+  }
+
+  .work-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    border-bottom: 1px solid #151515;
+    padding: 0.65rem 0.1rem 0.8rem;
+  }
+
+  .work-category {
+    font-family: "Space Mono", monospace;
+    font-size: 0.55rem;
+    text-transform: uppercase;
+  }
+
+  .work-meta h3 {
+    margin-top: 0.2rem;
+    font-family: "Dela Gothic One", sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+  }
+
+  .work-meta p {
+    margin-top: 0.15rem;
+    font-size: 0.7rem;
+    line-height: 1.4;
+  }
+
+  .work-arrow {
+    display: grid;
+    width: 2.2rem;
+    height: 2.2rem;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid #151515;
+    background: #fbe38e;
+  }
+</style>

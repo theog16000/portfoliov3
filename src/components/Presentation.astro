@@ -1,110 +1,211 @@
-
 ---
-import { Instagram, Linkedin, Github, Mail } from "lucide-astro";
-import Star40 from "./stars/Star40";
+import { ArrowDownRight, ArrowUpRight, Github, Linkedin } from "lucide-astro";
+import { withBase } from "../utils/site";
 ---
 
-<section class="border-2 border-black bg-[#F4EFEA] p-4 shadow-[4px_4px_0px_#000000] mx-auto flex flex-col justify-between max-w-sm w-full">
-  <!-- En-tête -->
-  <div>
-    <p class="font-mono font-black text-xs tracking-wider">
-      HELLO. I'M THEO
-    </p>
-
-    <div class="mt-1 leading-none">
-      <h1 class="font-dela text-3xl font-black uppercase text-[#F4EFEA] drop-shadow-[2px_2px_0px_#000000] [text-shadow:_2px_2px_0_#000,_-1px_-1px_0_#000,_1px_-1px_0_#000,_-1px_1px_0_#000,_2px_2px_0_#000]">
-        WEB <span class="text-[#FF6B6B] drop-shadow-[2px_2px_0px_#000000]">DESIGNER</span>
-      </h1>
-
-      <h1 class="font-dela text-3xl font-black uppercase text-[#F4EFEA] drop-shadow-[2px_2px_0px_#000000] [text-shadow:_2px_2px_0_#000,_-1px_-1px_0_#000,_1px_-1px_0_#000,_-1px_1px_0_#000,_2px_2px_0_#000]">
-        & <span class="text-[#7DD8EC] drop-shadow-[2px_2px_0px_#000000]">DEVELOPER</span>
-      </h1>
-    </div>
-
-    <p class="font-mono font-bold text-[11px] leading-snug mt-2">
-      SPECIALIZING IN CREATIVE<br />
-      LANDING PAGES FOR BUSINESSES.
-    </p>
+<section class="hero page-arrive">
+  <div class="hero-top">
+    <span>INDEPENDENT DESIGNER & DEVELOPER</span>
+    <span>BASED IN FRANCE · 2026</span>
   </div>
 
-  <!-- Barre inférieure -->
-  <div class="mt-4 flex items-center justify-between gap-2">
+  <div class="hero-main">
+    <div class="hero-copy">
+      <p class="hero-hello">Hey, I’m Théo.</p>
+      <h1>
+        I MAKE<br />
+        <span>WEBSITES</span><br />
+        WITH A<br />
+        <span class="hero-heart">LITTLE</span><br />
+        MORE <span>SOUL.</span>
+      </h1>
+      <p class="hero-intro">
+        I design and build playful digital experiences for people with something to say.
+      </p>
+    </div>
+    <div class="portrait-wrap" aria-label="Illustrated portrait of Théo">
+      <span class="portrait-note">THAT’S ME ↙</span>
+      <img src={withBase("/images/theo.webp")} alt="Illustrated portrait of Théo Genty" />
+      <span class="portrait-spark">✳</span>
+    </div>
+  </div>
 
-    <!-- Bouton READY TO WORK -->
-    <a
-      href="#contact"
-      class="group flex items-center gap-1.5 bg-[#FBD74B] border-2 border-black px-3 py-1.5 shadow-[2px_2px_0px_#000000] transition-all duration-200 hover:-translate-y-1 hover:shadow-[4px_5px_0px_#000000] hover:bg-[#ffe36b] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none font-mono font-bold text-[11px]"
-    >
-      <Star40
-        color="#5294FF"
-        stroke="black"
-        strokeWidth={10}
-        width={15}
-        height={15}
-        client:load
-        className="transition-transform duration-500 group-hover:rotate-[180deg]"
-      />
-
-      <span class="transition-transform duration-200 group-hover:scale-105">
-        READY TO WORK
-      </span>
-
-      <Star40
-        color="#5294FF"
-        stroke="black"
-        strokeWidth={10}
-        width={15}
-        height={15}
-        client:load
-        className="transition-transform duration-500 group-hover:-rotate-[180deg]"
-      />
+  <div class="hero-bottom">
+    <a href={withBase("/contact")} class="hero-contact">
+      HAVE A PROJECT? <ArrowUpRight size={17} />
     </a>
-
-    <!-- Réseaux sociaux -->
-    <div class="flex items-center gap-1.5">
-
-      <!-- Instagram -->
-      <a
-        href="https://instagram.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Instagram"
-        class="group flex items-center justify-center w-8 h-8 border-2 border-black bg-white shadow-[2px_2px_0px_#000000] transition-all duration-200 hover:-translate-y-1 hover:rotate-[-6deg] hover:bg-[#F9B5D0] hover:shadow-[4px_5px_0px_#000000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
-      >
-        <Instagram class="w-4 h-4 stroke-[2.5] transition-transform duration-300 group-hover:rotate-[15deg] group-hover:scale-110" />
+    <div class="hero-socials">
+      <a href="https://github.com/theog16000" aria-label="GitHub">
+        <Github size={18} />
       </a>
-
-      <!-- LinkedIn -->
-      <a
-        href="https://fr.linkedin.com/in/theogty"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="LinkedIn"
-        class="group flex items-center justify-center w-8 h-8 border-2 border-black bg-white shadow-[2px_2px_0px_#000000] transition-all duration-200 hover:-translate-y-1 hover:rotate-[6deg] hover:bg-[#7DD8EC] hover:shadow-[4px_5px_0px_#000000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
-      >
-        <Linkedin class="w-4 h-4 stroke-[2.5] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110" />
+      <a href="https://fr.linkedin.com/in/theogty" aria-label="LinkedIn">
+        <Linkedin size={18} />
       </a>
-
-      <!-- GitHub -->
-      <a
-        href="https://github.com/theog16000"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="GitHub"
-        class="group flex items-center justify-center w-8 h-8 border-2 border-black bg-white shadow-[2px_2px_0px_#000000] transition-all duration-200 hover:-translate-y-1 hover:rotate-[-6deg] hover:bg-[#D6D3D1] hover:shadow-[4px_5px_0px_#000000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
-      >
-        <Github class="w-4 h-4 stroke-[2.5] transition-transform duration-300 group-hover:rotate-[15deg] group-hover:scale-110" />
+      <a href="#selected-work" aria-label="Scroll to selected work">
+        <ArrowDownRight size={18} />
       </a>
-
-      <!-- Email -->
-      <a
-        href="mailto:theo.genty@icloud.com
-        aria-label="Email"
-        class="group flex items-center justify-center w-8 h-8 border-2 border-black bg-white shadow-[2px_2px_0px_#000000] transition-all duration-200 hover:-translate-y-1 hover:rotate-[6deg] hover:bg-[#FBD74B] hover:shadow-[4px_5px_0px_#000000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
-      >
-        <Mail class="w-4 h-4 stroke-[2.5] transition-transform duration-300 group-hover:scale-125 group-hover:-rotate-[10deg]" />
-      </a>
-
     </div>
   </div>
 </section>
+
+<style>
+  .hero {
+    overflow: hidden;
+    border: 1.5px solid #151515;
+    background: #fbe38e;
+    box-shadow: 5px 5px 0 #151515;
+  }
+
+  .hero-top,
+  .hero-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.8rem 0.9rem;
+    font-family: "Space Mono", monospace;
+    font-size: 0.53rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+
+  .hero-top {
+    border-bottom: 1.5px solid #151515;
+  }
+
+  .hero-top span:last-child {
+    text-align: right;
+  }
+
+  .hero-main {
+    position: relative;
+    min-height: 26rem;
+    padding: 1.3rem 1rem 1.5rem;
+  }
+
+  .hero-copy {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-hello {
+    margin-bottom: 0.5rem;
+    font-family: "Space Mono", monospace;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  .hero h1 {
+    font-family: "Dela Gothic One", sans-serif;
+    font-size: clamp(2.55rem, 13vw, 4rem);
+    line-height: 0.99;
+    letter-spacing: -0.08em;
+  }
+
+  .hero h1 > span:not(.hero-heart) {
+    color: #fffdfa;
+    -webkit-text-stroke: 1px #151515;
+    text-shadow: 3px 3px 0 #151515;
+  }
+
+  .hero h1 .hero-heart {
+    color: #ff6b6b;
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 3px;
+  }
+
+  .hero-intro {
+    max-width: 16rem;
+    margin-top: 0.9rem;
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .portrait-wrap {
+    position: absolute;
+    right: 0.6rem;
+    bottom: 0.4rem;
+    width: 8rem;
+    height: 8rem;
+    transform: rotate(7deg);
+  }
+
+  .portrait-wrap img {
+    width: 100%;
+    height: 100%;
+    border: 1.5px solid #151515;
+    border-radius: 50%;
+    background: #a3d8e2;
+    object-fit: cover;
+    box-shadow: 4px 4px 0 #151515;
+    animation: portrait-float 4s ease-in-out infinite;
+  }
+
+  .portrait-note {
+    position: absolute;
+    z-index: 2;
+    top: -0.25rem;
+    left: -2.7rem;
+    transform: rotate(-10deg);
+    font-family: "Space Mono", monospace;
+    font-size: 0.55rem;
+    font-weight: 700;
+  }
+
+  .portrait-spark {
+    position: absolute;
+    top: -0.55rem;
+    right: -0.45rem;
+    color: #ff6b6b;
+    font-size: 2rem;
+    -webkit-text-stroke: 1px #151515;
+    animation: spark-turn 12s linear infinite;
+  }
+
+  .hero-bottom {
+    min-height: 3.5rem;
+    border-top: 1.5px solid #151515;
+    background: #fffdfa;
+  }
+
+  .hero-contact {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: #151515;
+    font-family: "Space Mono", monospace;
+    font-size: 0.63rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .hero-socials {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .hero-socials a {
+    display: grid;
+    width: 2rem;
+    height: 2rem;
+    place-items: center;
+    border: 1px solid #151515;
+    color: #151515;
+    transition: transform 160ms ease, background-color 160ms ease;
+  }
+
+  .hero-socials a:active {
+    transform: translate(2px, 2px);
+    background: #a3d8e2;
+  }
+
+  @keyframes portrait-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+
+  @keyframes spark-turn {
+    to { transform: rotate(360deg); }
+  }
+</style>

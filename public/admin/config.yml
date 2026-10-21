@@ -29,28 +29,28 @@ auth:
 logo_url: https://decapbridge.com/decapcms-with-bridge.svg
 
 # Add site links in Decap CMS (optional)
-site_url: https://theogenty.fr
+site_url: https://theog16000.github.io/portfoliov3/
 
-# Garde le mode local pour tes tests sur ton ordi
+# Enable the local backend for local testing
 local_backend: true
 
-# Dossiers d'images
+# Image folders
 media_folder: "public/images"
-public_folder: "/images"
+public_folder: "/portfoliov3/images"
 
-# Tes collections de projets
+# Project collections
 collections:
   - name: "works"
-    label: "Projets"
+    label: "Projects"
     folder: "src/content/works"
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Titre", name: "title", widget: "string" }
+      - { label: "Title", name: "title", widget: "string" }
       - { label: "Description", name: "description", widget: "text", required: false }
-      - { label: "Image principale", name: "image", widget: "image", required: false }
-      - { label: "Catégorie", name: "category", widget: "string" }
+      - { label: "Main image", name: "image", widget: "image", required: false }
+      - { label: "Category", name: "category", widget: "string" }
       - { label: "Tags", name: "tags", widget: "list", required: false }
-      - { label: "Lien externe", name: "link", widget: "string", required: false }
-      - { label: "Ordre d'affichage", name: "order", widget: "number", required: false }
-      - { label: "Contenu de la page", name: "body", widget: "markdown" }
+      - { label: "External link", name: "link", widget: "string", required: false }
+      - { label: "Display order", name: "order", widget: "number", required: false }
+      - { label: "Page content", name: "body", widget: "markdown" }

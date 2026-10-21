@@ -2,20 +2,21 @@
 import Bouton from "./Bouton.jsx";
 import { House, User, BriefcaseBusiness, Github, Linkedin } from 'lucide-astro';
 import Star33 from "./stars/Star33";
+import { withBase } from "../utils/site";
 
 const links = [
-  { href: '/', label: 'Home', num: '01', icon: House, curtain: '#FBE38E' },
-  { href: '/apropos.pdf', label: 'About', num: '02', icon: User, curtain: '#7DFFB3' },
-  { href: '/projets', label: 'Projects', num: '03', icon: BriefcaseBusiness, curtain: '#A3D8E2' },
+  { href: withBase('/'), label: 'Home', num: '01', icon: House, curtain: '#FBE38E' },
+  { href: withBase('/about'), label: 'About', num: '02', icon: User, curtain: '#7DFFB3' },
+  { href: withBase('/projets'), label: 'Projects', num: '03', icon: BriefcaseBusiness, curtain: '#A3D8E2' },
 ];
 ---
 
 <div class="md:hidden">
-  <!-- Bouton Burger Neobrutaliste -->
+  <!-- Neo-brutalist menu button -->
   <button
     id="mobile-menu-btn"
     type="button"
-    aria-label="Menu de navigation"
+    aria-label="Navigation menu"
     aria-expanded="false"
     class="relative w-10 h-10 bg-white border-2 border-black shadow-[2px_2px_0px_#000] flex flex-col items-center justify-center gap-1 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all cursor-pointer z-[70]"
   >
@@ -24,12 +25,12 @@ const links = [
     <span class="burger-bar w-5 h-0.5 bg-black rounded-full transition-transform duration-300"></span>
   </button>
 
-  <!-- Overlay plein écran style "index" -->
+  <!-- Full-screen menu overlay -->
   <div
     id="mobile-drawer"
     class="hidden fixed inset-0 bg-[#F4EFEA] z-[60] flex flex-col"
   >
-    <!-- Bandeau défilant avec étoiles bien alignées et dimensionnées -->
+    <!-- Scrolling banner -->
     <div class="relative overflow-hidden border-b-2 border-black bg-black py-2 shrink-0">
       <div class="flex whitespace-nowrap items-center">
         <span class="animate-marquee shrink-0 font-mono font-black text-sm uppercase tracking-widest text-white pr-8 flex items-center gap-3">
@@ -45,7 +46,7 @@ const links = [
       </div>
     </div>
 
-    <!-- Liens de navigation, style index plein écran -->
+    <!-- Navigation links -->
     <nav class="flex-1 flex flex-col justify-center px-5 gap-3">
       {links.map((link, i) => {
         const Icon = link.icon;
@@ -67,9 +68,9 @@ const links = [
       })}
     </nav>
 
-    <!-- Bas : CTA + réseaux sociaux -->
+    <!-- Contact and social links -->
     <div class="shrink-0 px-5 pb-6 pt-2 flex flex-col gap-3 border-t-2 border-black/15">
-      <Bouton href="/contact" className="w-full text-center" client:load>Contact</Bouton>
+      <Bouton href={withBase('/contact')} className="w-full text-center" client:load>Contact</Bouton>
 
       <div class="flex gap-2">
         <a

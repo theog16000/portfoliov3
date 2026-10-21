@@ -1,21 +1,19 @@
 ---
-title: "Refonte App "
-description: Création d'une interface utilisateur néobrutaliste complète.
-image: /images/work1.png
-category: Code
+title: "App Redesign"
+description: A complete neo-brutalist user interface.
+category: Development
 tags:
   - UI/UX
   - Tailwind
   - Astro
-link: https://example.com
 order: 1
 ---
 
-## À propos du projet
+## About the project
 
-Ce projet consiste en la refonte complète d'une application SaaS. L'objectif était de moderniser l'expérience utilisateur tout en conservant une identité visuelle forte et unique.
+This project is a complete redesign of a SaaS application. The goal was to modernize the user experience while preserving a bold and distinctive visual identity.
 
-### Objectifs principaux :
-- **Optimisation des performances :** Temps de chargement rapide grâce à Astro.
-- **Identité visuelle :** Adoption d'un style Néobrutaliste assumé.
-- **Ergonomie :** Amélioration des parcours utilisateurs.
+### Main goals:
+- **Performance:** Fast loading times powered by Astro.
+- **Visual identity:** A confident neo-brutalist design.
+- **Usability:** Improved user journeys.

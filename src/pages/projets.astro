@@ -1,37 +1,34 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import { withBase } from '../utils/site';
 
-// 1. Récupération dynamique de la collection 'works'
+// 1. Fetch the works collection
 const allWorks = await getCollection('works');
 
-// Tri par ordre si défini, sinon conserve l'ordre par défaut
+// Sort by order when set; otherwise keep the default order
 const sortedWorks = allWorks.sort((a, b) => (a.data.order || 0) - (b.data.order || 0));
 
-// 2. Extraire dynamiquement les catégories uniques depuis le frontmatter de tes .md
+// 2. Build a unique list of categories from the Markdown frontmatter
 const rawCategories = sortedWorks.map(work => work.data.category).filter(Boolean);
 const categories = ['ALL', ...new Set(rawCategories)];
 ---
 
-<Layout title="Projets">
-  <section class="max-w-6xl mx-auto px-6 pt-28 pb-16">
-    
-    <!-- En-tête / Hero Section -->
-    <div class="border-[3px] border-black bg-[#F4EFEA] p-6 shadow-[4px_4px_0px_#000000] mb-10 text-center">
-      <h1 class="font-dela text-3xl md:text-5xl uppercase tracking-[-0.011em]">
-        MY <span class="bg-[#7DFFB3] px-2 border-2 border-black">PROJECTS</span>
-      </h1>
-      <p class="mt-2 text-sm md:text-base font-medium text-gray-700">
-        Découvrez l'ensemble de mes réalisations et projets.
-      </p>
-    </div>
+<Layout title="Projects — Théo Genty">
+  <section class="projects-page page-arrive">
+    <div class="projects-kicker"><span>THE GOOD STUFF</span><span>02 / 04</span></div>
+    <header class="projects-heading">
+      <span>WORK, NOT WORDS.</span>
+      <h1>MADE<br />WITH <em>INTENT.</em></h1>
+      <p>A small selection of things I’ve designed and built.</p>
+    </header>
 
-    <!-- Filtres dynamiques -->
-    <div class="flex flex-wrap justify-center gap-3 mb-12">
+    <!-- Dynamic filters -->
+    <div class="flex flex-wrap gap-2 mb-7">
       {categories.map((category, index) => (
         <button
           data-filter={category.toLowerCase()}
-          class={`filter-btn px-5 py-2 text-xs md:text-sm font-dela border-[3px] border-black shadow-[3px_3px_0px_#000000] transition-all hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[5px_5px_0px_#000000] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none uppercase cursor-pointer ${
+          class={`filter-btn px-3 py-2 text-[10px] font-bold border border-black transition-all active:scale-95 uppercase cursor-pointer ${
             index === 0 ? "bg-[#FF94B9]" : "bg-[#F5F5F5]"
           }`}
         >
@@ -40,8 +37,8 @@ const categories = ['ALL', ...new Set(rawCategories)];
       ))}
     </div>
 
-    <!-- Grille des Projets -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Project grid -->
+    <div class="grid grid-cols-1 gap-6">
       {sortedWorks.map((work) => {
         const category = work.data.category ? work.data.category.toLowerCase() : 'uncategorized';
         const workSlug = (work.id || work.slug).replace(/\.md$/, '');
@@ -49,13 +46,13 @@ const categories = ['ALL', ...new Set(rawCategories)];
         return (
           <article
             data-category={category}
-            class="project-card border-[3px] border-black bg-[#F5F5F5] p-4 shadow-[4px_4px_0px_#000000] flex flex-col justify-between"
+            class="project-card flex flex-col"
           >
             <div>
-              <!-- Aperçu de l'image -->
-              <div class="h-44 bg-gray-300 border-[2px] border-black w-full overflow-hidden mb-4">
+              <!-- Image preview -->
+              <div class="project-image h-48 bg-gray-300 border border-black w-full overflow-hidden mb-3">
                 {work.data.image ? (
-                  <img src={work.data.image} alt={work.data.title} class="w-full h-full object-cover" />
+                  <img src={withBase(work.data.image)} alt={work.data.title} class="w-full h-full object-cover" />
                 ) : (
                   <div class="w-full h-full flex items-center justify-center text-xs font-dela bg-[#A3D8E2]">
                     NO IMAGE
@@ -63,23 +60,23 @@ const categories = ['ALL', ...new Set(rawCategories)];
                 )}
               </div>
 
-              <!-- Titre -->
-              <h3 class="font-dela text-lg uppercase mb-2 truncate">
+              <!-- Title -->
+              <h3 class="font-dela text-xl uppercase mb-1 truncate">
                 {work.data.title}
               </h3>
 
               <!-- Description -->
               {work.data.description && (
-                <p class="text-xs text-gray-700 line-clamp-3 mb-4">
+                <p class="text-sm text-gray-700 line-clamp-3 mb-3">
                   {work.data.description}
                 </p>
               )}
 
-              <!-- Badges / Tags -->
+              <!-- Category and tags -->
               {work.data.tags && work.data.tags.length > 0 && (
                 <div class="flex flex-wrap gap-2 mb-4">
                   {work.data.tags.map((tag: string) => (
-                    <span class="text-[10px] font-bold border border-black bg-[#7DFFB3] px-2 py-0.5 shadow-[1px_1px_0px_#000000] uppercase">
+                    <span class="text-[10px] font-bold border border-black bg-[#7DFFB3] px-2 py-0.5 uppercase">
                       {tag}
                     </span>
                   ))}
@@ -87,10 +84,10 @@ const categories = ['ALL', ...new Set(rawCategories)];
               )}
             </div>
 
-            <!-- Bouton d'action / Lien unique par carte -->
+            <!-- Project link -->
             <a 
-              href={`/works/${workSlug}`}
-              class="w-full text-center font-dela text-xs border-[2px] border-black bg-[#A3D8E2] py-2 shadow-[2px_2px_0px_#000000] hover:bg-[#FF94B9] transition-colors uppercase block mt-2"
+              href={withBase(`/works/${workSlug}`)}
+              class="project-link w-full text-left font-mono text-xs border-y border-black py-3 uppercase block mt-1"
             >
               VIEW PROJECT ➔
             </a>
@@ -101,7 +98,7 @@ const categories = ['ALL', ...new Set(rawCategories)];
 
   </section>
 
-  <!-- Script côté client pour le filtrage -->
+  <!-- Client-side project filtering -->
   <script>
     document.addEventListener('astro:page-load', initFilters);
     document.addEventListener('DOMContentLoaded', initFilters);
@@ -111,6 +108,8 @@ const categories = ['ALL', ...new Set(rawCategories)];
       const cards = document.querySelectorAll<HTMLElement>('.project-card');
 
       buttons.forEach(button => {
+        if (button.dataset.filterReady === 'true') return;
+        button.dataset.filterReady = 'true';
         button.addEventListener('click', () => {
           const filter = button.getAttribute('data-filter');
 
@@ -134,3 +133,77 @@ const categories = ['ALL', ...new Set(rawCategories)];
     }
   </script>
 </Layout>
+
+<style>
+  .projects-page {
+    padding-bottom: 1rem;
+  }
+
+  .projects-kicker {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.2rem 0 0.8rem;
+    font-family: "Space Mono", monospace;
+    font-size: 0.55rem;
+    font-weight: 700;
+  }
+
+  .projects-heading {
+    position: relative;
+    overflow: hidden;
+    border: 1.5px solid #151515;
+    background: #ffaaa6;
+    padding: 1rem;
+    box-shadow: 4px 4px 0 #151515;
+  }
+
+  .projects-heading > span {
+    font-family: "Space Mono", monospace;
+    font-size: 0.58rem;
+    font-weight: 700;
+  }
+
+  .projects-heading h1 {
+    margin-top: 0.8rem;
+    font-family: "Dela Gothic One", sans-serif;
+    font-size: clamp(2.75rem, 13vw, 4rem);
+    line-height: 0.92;
+    letter-spacing: -0.08em;
+  }
+
+  .projects-heading h1 em {
+    color: #fffdfa;
+    font-style: normal;
+    -webkit-text-stroke: 1px #151515;
+    text-shadow: 3px 3px 0 #151515;
+  }
+
+  .projects-heading p {
+    max-width: 15rem;
+    margin-top: 0.85rem;
+    font-size: 0.76rem;
+    line-height: 1.5;
+  }
+
+  .project-card {
+    border-bottom: 1px solid #151515;
+    padding-bottom: 1rem;
+  }
+
+  .project-image {
+    background-color: #a3d8e2;
+  }
+
+  .project-image img {
+    transition: transform 400ms ease;
+  }
+
+  .project-card:active .project-image img {
+    transform: scale(1.035);
+  }
+
+  .project-link {
+    color: #151515;
+    text-decoration: none;
+  }
+</style>

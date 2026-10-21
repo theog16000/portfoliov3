@@ -1,154 +1,235 @@
 ---
-import Bouton from "./Bouton.jsx";
-import MobileMenu from "./MobileMenu.astro";
-import { House, User, BriefcaseBusiness, Github, Linkedin } from 'lucide-astro';
+import { House, UserRound, BriefcaseBusiness, Mail } from "lucide-astro";
+import { withBase } from "../utils/site";
+
+const links = [
+  { href: withBase("/"), label: "Home", icon: House, color: "#FBE38E" },
+  { href: withBase("/about"), label: "About", icon: UserRound, color: "#7DFFB3" },
+  { href: withBase("/projets"), label: "Work", icon: BriefcaseBusiness, color: "#A3D8E2" },
+  { href: withBase("/contact"), label: "Contact", icon: Mail, color: "#FF94B9" },
+];
 ---
 
-<header class="fixed top-0 left-0 w-full bg-[#F4EFEA] border-b-2 border-black items-center flex justify-between px-6 py-3 z-50">
-  
-  <!-- Photo / Profil -->
-  <div class="rounded-full object-cover w-12 shrink-0">
-    <img src="/images/theo.webp" alt="Photo de profil" class="rounded-full border-2 border-black shadow-[2px_2px_0px_#000]">
-  </div>
-
-  <!-- Navigation Desktop : Pages avec rideau dynamique -->
-  <nav class="hidden md:flex items-center gap-3 absolute left-1/2 -translate-x-1/2"> 
-    <a 
-      href="/" 
-      aria-label="ACCUEIL"
-      data-curtain-color="#FBE38E"
-      class="group flex items-center justify-center w-10 h-10 bg-[#F4EFEA] border-2 border-black shadow-[2px_2px_0px_#000] hover:bg-[#FBE38E] hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_#000] active:translate-y-0 active:shadow-[1px_1px_0px_#000] transition-all duration-200"
-    >
-      <House class="w-5 h-5 text-black transition-transform duration-200 group-hover:scale-110 group-hover:-rotate-12" stroke-width={2.2} />
-    </a>
-
-    <a 
-      href="/about" 
-      aria-label="À PROPOS"
-      data-curtain-color="#7DFFB3"
-      class="group flex items-center justify-center w-10 h-10 bg-[#F4EFEA] border-2 border-black shadow-[2px_2px_0px_#000] hover:bg-[#7DFFB3] hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_#000] active:translate-y-0 active:shadow-[1px_1px_0px_#000] transition-all duration-200"
-    >
-      <User class="w-5 h-5 text-black transition-transform duration-200 group-hover:scale-110 group-hover:rotate-12" stroke-width={2.2} />
-    </a>
-
-    <a 
-      href="/projets" 
-      aria-label="PROJETS"
-      data-curtain-color="#A3D8E2"
-      class="group flex items-center justify-center w-10 h-10 bg-[#F4EFEA] border-2 border-black shadow-[2px_2px_0px_#000] hover:bg-[#A3D8E2] hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_#000] active:translate-y-0 active:shadow-[1px_1px_0px_#000] transition-all duration-200"
-    >
-      <BriefcaseBusiness class="w-5 h-5 text-black transition-transform duration-200 group-hover:scale-110 group-hover:-rotate-12" stroke-width={2.2} />
-    </a>
-  </nav>
-
-  <!-- Actions Desktop : Réseaux sociaux + Bouton Contact -->
-  <div class="hidden md:flex items-center gap-3">
-    <!-- Bouton GitHub -->
-    <a
-      href="https://github.com/ton-profil"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Profil GitHub"
-      class="group flex items-center justify-center w-10 h-10 bg-[#F4EFEA] border-2 border-black shadow-[2px_2px_0px_#000] hover:bg-[#E2D9F3] hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all duration-150"
-    >
-      <Github class="w-5 h-5 text-black transition-transform duration-200 group-hover:scale-110 group-hover:rotate-12" stroke-width={2.2} />
-    </a>
-
-    <!-- Bouton LinkedIn -->
-    <a
-      href="https://linkedin.com/in/ton-profil"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Profil LinkedIn"
-      class="group flex items-center justify-center w-10 h-10 bg-[#F4EFEA] border-2 border-black shadow-[2px_2px_0px_#000] hover:bg-[#A3D8E2] hover:-translate-y-0.5 hover:shadow-[3px_3px_0px_#000] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all duration-150"
-    >
-      <Linkedin class="w-5 h-5 text-black transition-transform duration-200 group-hover:scale-110 group-hover:-rotate-12" stroke-width={2.2} />
-    </a>
-
-    <Bouton />
-  </div>
-
-  <!-- Menu burger mobile -->
-  <MobileMenu client:load>
-    <Bouton />
-  </MobileMenu>
-
+<header class="mobile-header">
+  <a href={withBase("/")} class="identity" aria-label="Théo Genty — home">
+    <img src={withBase("/images/theo.webp")} alt="" />
+    <span>
+      <strong>THÉO GENTY</strong>
+      <small>DESIGN · CODE · IDEAS</small>
+    </span>
+  </a>
+  <span class="availability"><i></i> AVAILABLE FOR WORK</span>
 </header>
 
-<script>
-  import { navigate } from 'astro:transitions/client';
+<nav class="mobile-dock" aria-label="Main navigation">
+  {links.map(({ href, label, icon: Icon, color }) => (
+    <a href={href} data-curtain-color={color} class="dock-link" aria-label={label}>
+      <Icon size={19} strokeWidth={2.2} />
+      <span>{label}</span>
+    </a>
+  ))}
+</nav>
 
-  function initDynamicCurtain() {
-    const wrapper = document.getElementById('curtain-wrapper');
-    const main = document.getElementById('curtain-main');
-    const shadow = document.getElementById('curtain-shadow');
-    const badgeText = document.getElementById('curtain-text');
-    if (!wrapper || !main || !shadow) return;
-
-    const savedColor = sessionStorage.getItem('curtain_color');
-    const savedLabel = sessionStorage.getItem('curtain_label');
-
-    if (savedColor) {
-      main.style.backgroundColor = savedColor;
-      if (badgeText && savedLabel) badgeText.innerText = `${savedLabel} ★`;
-
-      main.style.transform = 'translateX(0)';
-      shadow.style.transform = 'translateX(0)';
-
-      requestAnimationFrame(() => {
-        wrapper.classList.remove('curtain-in');
-        wrapper.classList.add('curtain-out');
-      });
-
-      const onOutDone = (e) => {
-        if (e.target !== main || e.propertyName !== 'transform') return;
-        main.removeEventListener('transitionend', onOutDone);
-        wrapper.className = 'pointer-events-none';
-        main.style.transform = 'translateX(-101%)';
-        shadow.style.transform = 'translateX(-101%)';
-        main.style.transition = 'none';
-        shadow.style.transition = 'none';
-        sessionStorage.removeItem('curtain_color');
-        sessionStorage.removeItem('curtain_label');
-      };
-      main.addEventListener('transitionend', onOutDone);
-    }
-
-    const links = document.querySelectorAll('[data-curtain-color]');
-    links.forEach((link) => {
-      link.addEventListener('click', (e) => {
-        const target = link.getAttribute('href');
-        if (!target || target === window.location.pathname) return;
-
-        e.preventDefault();
-
-        const color = link.getAttribute('data-curtain-color') || '#FBE38E';
-        const label = link.getAttribute('aria-label') || 'CHARGEMENT';
-
-        sessionStorage.setItem('curtain_color', color);
-        sessionStorage.setItem('curtain_label', label);
-
-        main.style.transition = 'none';
-        shadow.style.transition = 'none';
-        main.style.transform = 'translateX(-101%)';
-        shadow.style.transform = 'translateX(-101%)';
-        main.style.backgroundColor = color;
-        if (badgeText) badgeText.innerText = `${label} ★`;
-
-        requestAnimationFrame(() => {
-          wrapper.classList.remove('curtain-out');
-          wrapper.classList.add('curtain-in');
-        });
-
-        const onInDone = (e2) => {
-          if (e2.target !== main || e2.propertyName !== 'transform') return;
-          main.removeEventListener('transitionend', onInDone);
-          navigate(target);
-        };
-        main.addEventListener('transitionend', onInDone);
-      });
-    });
+<style>
+  .mobile-header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 50;
+    display: flex;
+    height: 4.5rem;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1.5px solid #151515;
+    background: #f4efe9;
+    padding: 0 max(1rem, calc((100vw - 448px) / 2));
   }
 
-  document.addEventListener('astro:page-load', initDynamicCurtain);
+  .identity {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    color: #151515;
+    text-decoration: none;
+  }
+
+  .identity img {
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1.5px solid #151515;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 2px 2px 0 #151515;
+  }
+
+  .identity strong,
+  .identity small {
+    display: block;
+  }
+
+  .identity strong {
+    font-family: "Dela Gothic One", sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: -0.04em;
+  }
+
+  .identity small {
+    margin-top: 0.15rem;
+    font-family: "Space Mono", monospace;
+    font-size: 0.52rem;
+    letter-spacing: 0.04em;
+  }
+
+  .availability {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: "Space Mono", monospace;
+    font-size: 0.52rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+  }
+
+  .availability i {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background: #1eaa69;
+    box-shadow: 0 0 0 3px #1eaa6920;
+  }
+
+  .mobile-dock {
+    position: fixed;
+    inset: auto 0 0;
+    z-index: 50;
+    display: grid;
+    width: min(100%, 480px);
+    grid-template-columns: repeat(4, 1fr);
+    margin: 0 auto;
+    border: 1.5px solid #151515;
+    border-bottom: 0;
+    border-radius: 1rem 1rem 0 0;
+    background: #fffdfa;
+    padding: 0.55rem 0.75rem calc(0.55rem + env(safe-area-inset-bottom));
+    box-shadow: 0 -5px 20px #15151510;
+  }
+
+  .dock-link {
+    display: flex;
+    min-height: 3.1rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    border-radius: 0.6rem;
+    color: #151515;
+    font-family: "Space Mono", monospace;
+    font-size: 0.58rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color 160ms ease, transform 160ms ease;
+  }
+
+  .dock-link:active {
+    transform: scale(0.94);
+    background: #fbe38e;
+  }
+
+  .dock-link[aria-current="page"] {
+    background: #fbe38e;
+  }
+
+  @media (min-width: 768px) {
+    .mobile-header,
+    .mobile-dock {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  import { navigate } from "astro:transitions/client";
+
+  let transitionInProgress = false;
+
+  function handlePageLoad() {
+    transitionInProgress = false;
+    if (!window.location.hash) window.scrollTo({ top: 0, behavior: "instant" });
+    document.querySelectorAll<HTMLAnchorElement>(".dock-link").forEach((link) => {
+      const destination = new URL(link.href).pathname.replace(/\/$/, "") || "/";
+      const current = window.location.pathname.replace(/\/$/, "") || "/";
+      if (destination === current) link.setAttribute("aria-current", "page");
+      else link.removeAttribute("aria-current");
+    });
+
+    const wrapper = document.getElementById("curtain-wrapper");
+    const main = document.getElementById("curtain-main");
+    const shadow = document.getElementById("curtain-shadow");
+    if (!wrapper || !main || !shadow) return;
+
+    const savedColor = sessionStorage.getItem("curtain_color");
+    if (!savedColor) return;
+
+    main.style.backgroundColor = savedColor;
+    main.style.transform = "translateY(0)";
+    shadow.style.transform = "translateY(0)";
+    requestAnimationFrame(() => {
+      wrapper.classList.remove("curtain-in");
+      wrapper.classList.add("curtain-out");
+    });
+
+    const reset = (event: TransitionEvent) => {
+      if (event.target !== main || event.propertyName !== "transform") return;
+      main.removeEventListener("transitionend", reset);
+      wrapper.className = "pointer-events-none";
+      main.style.transform = "translateY(-101%)";
+      shadow.style.transform = "translateY(-101%)";
+      main.style.transition = "none";
+      shadow.style.transition = "none";
+      sessionStorage.removeItem("curtain_color");
+    };
+    main.addEventListener("transitionend", reset);
+  }
+
+  if (!document.documentElement.dataset.navigationReady) {
+    document.documentElement.dataset.navigationReady = "true";
+    document.addEventListener("astro:page-load", handlePageLoad);
+    document.addEventListener("click", (event) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      const link = target.closest<HTMLAnchorElement>("a[data-curtain-color]");
+      if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+      const url = new URL(link.href);
+      if (url.origin !== window.location.origin || url.pathname === window.location.pathname) return;
+
+      const main = document.getElementById("curtain-main");
+      const shadow = document.getElementById("curtain-shadow");
+      const wrapper = document.getElementById("curtain-wrapper");
+      if (!main || !shadow || !wrapper || transitionInProgress) return;
+
+      event.preventDefault();
+      transitionInProgress = true;
+      sessionStorage.setItem("curtain_color", link.dataset.curtainColor || "#FBE38E");
+      main.style.transition = "none";
+      shadow.style.transition = "none";
+      main.style.transform = "translateY(-101%)";
+      shadow.style.transform = "translateY(-101%)";
+      main.style.backgroundColor = link.dataset.curtainColor || "#FBE38E";
+
+      requestAnimationFrame(() => {
+        wrapper.classList.remove("curtain-out");
+        wrapper.classList.add("curtain-in");
+      });
+
+      let timeout: number;
+      const go = (transitionEvent?: TransitionEvent) => {
+        if (transitionEvent && (transitionEvent.target !== main || transitionEvent.propertyName !== "transform")) return;
+        main.removeEventListener("transitionend", go as EventListener);
+        window.clearTimeout(timeout);
+        navigate(url.pathname + url.search + url.hash);
+      };
+      main.addEventListener("transitionend", go as EventListener);
+      timeout = window.setTimeout(() => go(), 1200);
+    });
+  }
 </script>

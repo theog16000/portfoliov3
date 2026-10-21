@@ -1,65 +1,103 @@
 ---
-import Star15 from '../components/stars/Star15.tsx';
-import ToolCard from '../components/ToolCard.astro';
-import Notion from '../components/icons/notion.svg';
-import Figma from '../components/icons/figma.svg';
-import Tailwind from '../components/icons/tailwind.svg';
-import Vue from '../components/icons/vue.svg';
-import Github from '../components/icons/github.svg';
+import Notion from "./icons/notion.svg";
+import Figma from "./icons/figma.svg";
+import Tailwind from "./icons/tailwind.svg";
+import Vue from "./icons/vue.svg";
+import Github from "./icons/github.svg";
+
+const tools = [
+  { name: "Figma", icon: Figma },
+  { name: "Notion", icon: Notion },
+  { name: "Vue", icon: Vue },
+  { name: "Tailwind", icon: Tailwind },
+  { name: "GitHub", icon: Github },
+];
 ---
 
-<ToolCard title="TOOLS">
-  <div class="flex flex-wrap items-center justify-center gap-5 max-w-[250px] mx-auto py-3">
-    
-    <!-- 1. Figma -->
-    <div class="relative inline-flex items-center justify-center cursor-pointer group drop-shadow-[3px_3px_0px_#000000] transition-transform duration-300 hover:scale-110">
-<div class="transition-transform duration-700 ease-in-out group-hover:rotate-[360deg]">
-          <Star15 className="w-16 h-16" color="#5294FF" stroke="black" strokeWidth={3} />
-      </div>
-      <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <Figma class="w-7 h-7 text-white" />
-      </div>
-    </div>
-  
-    <!-- 2. Notion -->
-    <div class="relative inline-flex items-center justify-center cursor-pointer group drop-shadow-[3px_3px_0px_#000000] transition-transform duration-300 hover:scale-110">
-<div class="transition-transform duration-700 ease-in-out group-hover:rotate-[360deg]">
-          <Star15 className="w-16 h-16" color="#5294FF" stroke="black" strokeWidth={3} />
-      </div>
-      <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <Notion class="w-7 h-7 text-white" />
-      </div>
-    </div>
-
-    <!-- 3. Vue -->
-    <div class="relative inline-flex items-center justify-center cursor-pointer group drop-shadow-[3px_3px_0px_#000000] transition-transform duration-300 hover:scale-110">
-<div class="transition-transform duration-700 ease-in-out group-hover:rotate-[360deg]">
-          <Star15 className="w-16 h-16" color="#5294FF" stroke="black" strokeWidth={3} />
-      </div>
-      <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <Vue class="w-7 h-7 text-white" />
-      </div>
-    </div>
-
-    <!-- 4. Tailwind -->
-    <div class="relative inline-flex items-center justify-center cursor-pointer group drop-shadow-[3px_3px_0px_#000000] transition-transform duration-300 hover:scale-110">
-<div class="transition-transform duration-700 ease-in-out group-hover:rotate-[360deg]">
-          <Star15 className="w-16 h-16" color="#5294FF" stroke="black" strokeWidth={3} />
-      </div>
-      <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <Tailwind class="w-7 h-7 text-white" />
-      </div>
-    </div>
-
-    <!-- 5. Github -->
-    <div class="relative inline-flex items-center justify-center cursor-pointer group drop-shadow-[3px_3px_0px_#000000] transition-transform duration-300 hover:scale-110">
-<div class="transition-transform duration-700 ease-in-out group-hover:rotate-[360deg]">
-          <Star15 className="w-16 h-16" color="#5294FF" stroke="black" strokeWidth={3} />
-      </div>
-      <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <Github class="w-7 h-7 text-white" />
-      </div>
-    </div>
-
+<section class="tool-section page-arrive">
+  <div class="section-heading">
+    <span>01 / THE TOOLBOX</span>
+    <h2>MY KIT</h2>
   </div>
-</ToolCard>
+  <div class="tool-list">
+    {tools.map(({ name, icon: Icon }, index) => (
+      <div class="tool-item" style={`--tool-index: ${index}`}>
+        <span class="tool-number">0{index + 1}</span>
+        <Icon class="tool-icon" />
+        <span class="tool-name">{name}</span>
+        <span class="tool-star" aria-hidden="true">✳</span>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .tool-section {
+    margin-top: 3.2rem;
+  }
+
+  .section-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-heading > span {
+    font-family: "Space Mono", monospace;
+    font-size: 0.58rem;
+    font-weight: 700;
+  }
+
+  .section-heading h2 {
+    font-family: "Dela Gothic One", sans-serif;
+    font-size: 1.6rem;
+    line-height: 1;
+  }
+
+  .tool-list {
+    border-top: 1.5px solid #151515;
+  }
+
+  .tool-item {
+    display: grid;
+    min-height: 3.4rem;
+    grid-template-columns: 2rem 1.8rem 1fr 1.2rem;
+    align-items: center;
+    gap: 0.7rem;
+    border-bottom: 1px solid #15151550;
+    padding: 0.35rem 0.45rem;
+    transition: background-color 180ms ease, padding 180ms ease;
+  }
+
+  .tool-item:active {
+    padding-inline: 0.75rem;
+    background: #a3d8e2;
+  }
+
+  .tool-number {
+    color: #5e5a55;
+    font-family: "Space Mono", monospace;
+    font-size: 0.58rem;
+  }
+
+  .tool-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .tool-name {
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+
+  .tool-star {
+    color: #ff6b6b;
+    font-size: 1.1rem;
+    transition: transform 300ms ease;
+  }
+
+  .tool-item:active .tool-star {
+    transform: rotate(90deg);
+  }
+</style>

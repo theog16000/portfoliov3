@@ -1,9 +1,5 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -34,22 +30,6 @@
     --shadow: var(--shadow);
     --font-dela: "Dela Gothic One", sans-serif;
   --font-mono: "Space Mono", monospace;
-  @keyframes marquee {
-  0% {
-    transform: translateX(0%);
-        }
-  100% {
-    transform: translateX(-100%);
-        }
-    }
-  @keyframes marquee2 {
-  0% {
-    transform: translateX(100%);
-        }
-  100% {
-    transform: translateX(0%);
-        }
-    }
 }
 
 :root {
@@ -129,7 +109,7 @@
 }
 
 .text-outline {
-  /* On simule un contour "outside" très marqué et net avec plusieurs text-shadow dans toutes les directions */
+  /* Create a bold outside outline with text shadows in every direction */
   text-shadow: 
     -3px -3px 0 #000,
      3px -3px 0 #000,
@@ -139,12 +119,39 @@
      3px  0px 0 #000,
      0px -3px 0 #000,
      0px  3px 0 #000,
-    /* Et on ajoute l'ombre décalée en bas à droite (style neobrutaliste) */
+    /* Add the offset bottom-right shadow used by the neo-brutalist style */
     4px 4px 0px #000;
 }
 
 @layer utilities {
-  /* Animation de rotation continue sur 360 degrés */
+  @keyframes page-arrive {
+    from {
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .page-arrive {
+    animation: page-arrive 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .ticker-track {
+    animation: marquee 22s linear infinite;
+  }
+
+  /* Continuous 360-degree rotation */
   @keyframes spin-slow {
     from {
       transform: rotate(0deg);
@@ -158,7 +165,7 @@
     animation: spin-slow 12s linear infinite;
   }
 
-  /* Variante un peu plus rapide ou inversée si besoin */
+  /* Faster or reversed rotation variants */
   @keyframes spin-reverse {
     from {
       transform: rotate(360deg);
@@ -173,15 +180,13 @@
   }
 }
 
-@theme {
-  --animate-marquee: marquee 20s linear infinite;
-
-  @keyframes marquee {
-    from {
-      transform: translateX(100%);
-    }
-    to {
-      transform: translateX(-100%);
-    }
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
   }
 }
