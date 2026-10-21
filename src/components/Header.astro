@@ -23,7 +23,7 @@ const links = [
 
 <nav class="mobile-dock" aria-label="Main navigation">
   {links.map(({ href, label, icon: Icon, color }) => (
-    <a href={href} data-curtain-color={color} class="dock-link" aria-label={label}>
+    <a href={href} data-astro-reload data-curtain-color={color} class="dock-link" aria-label={label}>
       <Icon size={19} strokeWidth={2.2} />
       <span>{label}</span>
     </a>
@@ -134,8 +134,27 @@ const links = [
     background: #fbe38e;
   }
 
+  .dock-link svg {
+    transition: transform 180ms ease;
+  }
+
+  .dock-link:active svg {
+    transform: translateY(-3px) rotate(-8deg);
+  }
+
   .dock-link[aria-current="page"] {
     background: #fbe38e;
+  }
+
+  @media (hover: hover) {
+    .dock-link:hover {
+      transform: translateY(-3px);
+      background: #fbe38e;
+    }
+
+    .dock-link:hover svg {
+      transform: rotate(-8deg);
+    }
   }
 
   @media (min-width: 768px) {
@@ -147,8 +166,6 @@ const links = [
 </style>
 
 <script>
-  import { navigate } from "astro:transitions/client";
-
   let transitionInProgress = false;
 
   function handlePageLoad() {
@@ -226,7 +243,7 @@ const links = [
         if (transitionEvent && (transitionEvent.target !== main || transitionEvent.propertyName !== "transform")) return;
         main.removeEventListener("transitionend", go as EventListener);
         window.clearTimeout(timeout);
-        navigate(url.pathname + url.search + url.hash);
+        window.location.assign(url.href);
       };
       main.addEventListener("transitionend", go as EventListener);
       timeout = window.setTimeout(() => go(), 1200);

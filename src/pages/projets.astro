@@ -24,10 +24,11 @@ const categories = ['ALL', ...new Set(rawCategories)];
     </header>
 
     <!-- Dynamic filters -->
-    <div class="flex flex-wrap gap-2 mb-7">
+    <div class="project-filters flex flex-wrap gap-2 mb-5" aria-label="Filter projects">
       {categories.map((category, index) => (
         <button
           data-filter={category.toLowerCase()}
+          aria-pressed={index === 0 ? "true" : "false"}
           class={`filter-btn px-3 py-2 text-[10px] font-bold border border-black transition-all active:scale-95 uppercase cursor-pointer ${
             index === 0 ? "bg-[#FF94B9]" : "bg-[#F5F5F5]"
           }`}
@@ -38,7 +39,8 @@ const categories = ['ALL', ...new Set(rawCategories)];
     </div>
 
     <!-- Project grid -->
-    <div class="grid grid-cols-1 gap-6">
+    <p class="project-swipe-hint">PICK A FILTER, THEN SWIPE <span aria-hidden="true">↔</span></p>
+    <div class="project-grid" aria-label="Projects. Swipe horizontally to browse." tabindex="0">
       {sortedWorks.map((work) => {
         const category = work.data.category ? work.data.category.toLowerCase() : 'uncategorized';
         const workSlug = (work.id || work.slug).replace(/\.md$/, '');
@@ -116,9 +118,11 @@ const categories = ['ALL', ...new Set(rawCategories)];
           buttons.forEach(btn => {
             btn.classList.remove('bg-[#FF94B9]');
             btn.classList.add('bg-[#F5F5F5]');
+            btn.setAttribute('aria-pressed', 'false');
           });
           button.classList.add('bg-[#FF94B9]');
           button.classList.remove('bg-[#F5F5F5]');
+          button.setAttribute('aria-pressed', 'true');
 
           cards.forEach(card => {
             const category = card.getAttribute('data-category');
@@ -137,6 +141,59 @@ const categories = ['ALL', ...new Set(rawCategories)];
 <style>
   .projects-page {
     padding-bottom: 1rem;
+  }
+
+  .project-filters {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    margin-top: 1.5rem;
+    padding: 0.2rem 0.15rem 0.55rem;
+    scrollbar-width: none;
+  }
+
+  .project-filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .project-swipe-hint {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.55rem;
+    font-family: "Space Mono", monospace;
+    font-size: 0.53rem;
+    font-weight: 700;
+  }
+
+  .project-swipe-hint span {
+    font-size: 1.1rem;
+    animation: projects-nudge 1.8s ease-in-out infinite;
+  }
+
+  .project-grid {
+    display: grid;
+    grid-auto-columns: minmax(82%, 1fr);
+    grid-auto-flow: column;
+    gap: 0.9rem;
+    margin-right: -1rem;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    padding: 0.35rem 1rem 1rem 0.15rem;
+    scroll-padding-inline: 0.15rem;
+    scroll-snap-type: x mandatory;
+    scrollbar-color: #151515 #f4efe9;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .filter-btn {
+    flex: 0 0 auto;
+    min-height: 2.5rem;
+    box-shadow: 2px 2px 0 #151515;
+  }
+
+  .filter-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
   }
 
   .projects-kicker {
@@ -186,8 +243,62 @@ const categories = ['ALL', ...new Set(rawCategories)];
   }
 
   .project-card {
-    border-bottom: 1px solid #151515;
-    padding-bottom: 1rem;
+    min-width: 0;
+    scroll-snap-align: start;
+    border: 1.5px solid #151515;
+    background: #fffdfa;
+    padding: 0.6rem 0.6rem 1rem;
+    box-shadow: 3px 3px 0 #151515;
+    transform: rotate(-1deg);
+    transition: transform 220ms ease, box-shadow 220ms ease;
+  }
+
+  .project-card:nth-child(even) {
+    transform: rotate(1deg);
+  }
+
+  .project-card[style*="display: none"] {
+    pointer-events: none;
+  }
+
+  .project-card:active,
+  .project-card:nth-child(even):active {
+    transform: rotate(0) scale(0.985);
+    box-shadow: 1px 1px 0 #151515;
+  }
+
+  .project-card h3 {
+    margin-top: 0.8rem;
+  }
+
+  .project-card > div:first-child {
+    flex: 1;
+  }
+
+  .project-card .project-image {
+    margin-bottom: 0.65rem;
+  }
+
+  .project-link {
+    transition: padding-left 180ms ease, color 180ms ease;
+  }
+
+  @media (hover: hover) {
+    .project-card:hover,
+    .project-card:nth-child(even):hover {
+      transform: rotate(0) translateY(-3px);
+      box-shadow: 5px 5px 0 #151515;
+    }
+
+    .project-link:hover {
+      padding-left: 0.6rem;
+      color: #ff6b6b;
+    }
+  }
+
+  @keyframes projects-nudge {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
   }
 
   .project-image {

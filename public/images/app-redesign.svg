@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" fill="none">
+  <rect width="1200" height="760" fill="#D9CAFA"/>
+  <circle cx="1004" cy="116" r="214" fill="#FFAAA6"/>
+  <circle cx="1004" cy="116" r="158" fill="#FBE38E"/>
+  <rect x="102" y="80" width="871" height="570" rx="18" fill="#151515"/>
+  <rect x="116" y="94" width="843" height="542" rx="10" fill="#FFFDFA"/>
+  <path d="M126 94h823a10 10 0 0 1 10 10v48H116v-48a10 10 0 0 1 10-10Z" fill="#151515"/>
+  <circle cx="148" cy="122" r="7" fill="#FF6B6B"/>
+  <circle cx="174" cy="122" r="7" fill="#FBE38E"/>
+  <circle cx="200" cy="122" r="7" fill="#7DFFB3"/>
+  <rect x="144" y="181" width="221" height="412" rx="7" fill="#F4EFE9"/>
+  <rect x="169" y="210" width="108" height="13" rx="6.5" fill="#151515"/>
+  <rect x="169" y="253" width="154" height="37" rx="6" fill="#7DFFB3"/>
+  <rect x="169" y="307" width="138" height="10" rx="5" fill="#B9B3AC"/>
+  <rect x="169" y="338" width="164" height="10" rx="5" fill="#B9B3AC"/>
+  <rect x="169" y="369" width="122" height="10" rx="5" fill="#B9B3AC"/>
+  <rect x="169" y="423" width="164" height="10" rx="5" fill="#B9B3AC"/>
+  <rect x="169" y="454" width="142" height="10" rx="5" fill="#B9B3AC"/>
+  <rect x="169" y="485" width="151" height="10" rx="5" fill="#B9B3AC"/>
+  <rect x="395" y="181" width="529" height="142" rx="7" fill="#A3D8E2"/>
+  <rect x="426" y="211" width="220" height="16" rx="8" fill="#151515"/>
+  <rect x="426" y="244" width="307" height="11" rx="5.5" fill="#151515"/>
+  <rect x="426" y="267" width="255" height="11" rx="5.5" fill="#151515"/>
+  <path d="m773 278 40-40 37 24 43-54" stroke="#151515" stroke-linecap="round" stroke-linejoin="round" stroke-width="9"/>
+  <path d="M880 208h13v13" stroke="#151515" stroke-linecap="round" stroke-linejoin="round" stroke-width="9"/>
+  <rect x="395" y="349" width="251" height="244" rx="7" fill="#FBE38E"/>
+  <rect x="672" y="349" width="252" height="244" rx="7" fill="#FFAAA6"/>
+  <rect x="425" y="378" width="131" height="13" rx="6.5" fill="#151515"/>
+  <circle cx="520" cy="492" r="58" fill="#FF6B6B" stroke="#151515" stroke-width="8"/>
+  <path d="M520 434a58 58 0 0 1 51 30l-51 28v-58Z" fill="#7DFFB3" stroke="#151515" stroke-width="8"/>
+  <path d="M571 464a58 58 0 0 1-44 85l-7-57 51-28Z" fill="#A3D8E2" stroke="#151515" stroke-width="8"/>
+  <rect x="702" y="378" width="126" height="13" rx="6.5" fill="#151515"/>
+  <rect x="702" y="422" width="192" height="49" rx="6" fill="#FFFDFA" stroke="#151515" stroke-width="4"/>
+  <rect x="722" y="440" width="89" height="10" rx="5" fill="#151515"/>
+  <rect x="702" y="488" width="192" height="49" rx="6" fill="#7DFFB3" stroke="#151515" stroke-width="4"/>
+  <rect x="722" y="506" width="119" height="10" rx="5" fill="#151515"/>
+  <path d="M807 576c-26 0-47-21-47-47" stroke="#151515" stroke-linecap="round" stroke-width="8"/>
+  <path d="m746 535 14-7 7 15" stroke="#151515" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"/>
+  <g transform="rotate(-8 1004 535)">
+    <rect x="872" y="480" width="248" height="112" fill="#7DFFB3" stroke="#151515" stroke-width="5"/>
+    <text x="898" y="525" fill="#151515" font-family="monospace" font-size="25" font-weight="700">APP REDESIGN</text>
+    <text x="898" y="560" fill="#151515" font-family="monospace" font-size="16" font-weight="700">UI WITH A LITTLE SOUL</text>
+  </g>
+</svg>

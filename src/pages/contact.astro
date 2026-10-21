@@ -185,7 +185,8 @@ import Layout from "../layouts/Layout.astro";
   }
 
   .contact-input:focus {
-    box-shadow: 3px 3px 0 #a3d8e2;
+    background: #fff;
+    box-shadow: 4px 4px 0 #a3d8e2;
   }
 
   .contact-submit {
@@ -201,11 +202,28 @@ import Layout from "../layouts/Layout.astro";
     font-weight: 700;
     text-transform: uppercase;
     box-shadow: 3px 3px 0 #151515;
+    transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
   }
 
   .contact-submit:active {
     transform: translate(2px, 2px);
     box-shadow: 1px 1px 0 #151515;
+  }
+
+  @media (hover: hover) {
+    .contact-submit:hover {
+      transform: translate(-2px, -2px);
+      background: #7dffb3;
+      box-shadow: 5px 5px 0 #151515;
+    }
+
+    .email-card {
+      transition: transform 220ms ease;
+    }
+
+    .email-card:hover {
+      transform: rotate(-1deg);
+    }
   }
 
   .form-note {

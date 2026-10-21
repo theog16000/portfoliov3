@@ -5,34 +5,35 @@ import { withBase } from "../utils/site";
 
 <section class="hero page-arrive">
   <div class="hero-top">
-    <span>INDEPENDENT DESIGNER & DEVELOPER</span>
-    <span>BASED IN FRANCE · 2026</span>
+    <span>ONE HUMAN, MANY IDEAS</span>
+    <span><i></i> OPEN TO PROJECTS</span>
   </div>
 
   <div class="hero-main">
     <div class="hero-copy">
-      <p class="hero-hello">Hey, I’m Théo.</p>
+      <p class="hero-hello"><span>DESIGNER + DEVELOPER</span><span>BASED IN FRANCE</span></p>
       <h1>
         I MAKE<br />
         <span>WEBSITES</span><br />
         WITH A<br />
-        <span class="hero-heart">LITTLE</span><br />
-        MORE <span>SOUL.</span>
+        <span class="hero-heart">PULSE.</span>
       </h1>
       <p class="hero-intro">
-        I design and build playful digital experiences for people with something to say.
+        Thoughtful design, good code, and a little bit of mischief.
       </p>
     </div>
     <div class="portrait-wrap" aria-label="Illustrated portrait of Théo">
       <span class="portrait-note">THAT’S ME ↙</span>
       <img src={withBase("/images/theo.webp")} alt="Illustrated portrait of Théo Genty" />
       <span class="portrait-spark">✳</span>
+      <span class="portrait-sticker">MADE BY<br />A HUMAN</span>
     </div>
+    <span class="hero-orbit-word" aria-hidden="true">GOOD IDEAS ONLY · GOOD IDEAS ONLY ·</span>
   </div>
 
   <div class="hero-bottom">
     <a href={withBase("/contact")} class="hero-contact">
-      HAVE A PROJECT? <ArrowUpRight size={17} />
+      LET’S MAKE SOMETHING <ArrowUpRight size={17} />
     </a>
     <div class="hero-socials">
       <a href="https://github.com/theog16000" aria-label="GitHub">
@@ -50,9 +51,10 @@ import { withBase } from "../utils/site";
 
 <style>
   .hero {
+    position: relative;
     overflow: hidden;
     border: 1.5px solid #151515;
-    background: #fbe38e;
+    background: #ffaaa6;
     box-shadow: 5px 5px 0 #151515;
   }
 
@@ -71,16 +73,44 @@ import { withBase } from "../utils/site";
 
   .hero-top {
     border-bottom: 1.5px solid #151515;
+    background: #fffdfa;
   }
 
   .hero-top span:last-child {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
     text-align: right;
+  }
+
+  .hero-top i {
+    width: 0.45rem;
+    height: 0.45rem;
+    border: 1px solid #151515;
+    border-radius: 50%;
+    background: #7dffb3;
+    box-shadow: 0 0 0 3px #7dffb355;
+    animation: status-pulse 1.8s ease-in-out infinite;
   }
 
   .hero-main {
     position: relative;
-    min-height: 26rem;
-    padding: 1.3rem 1rem 1.5rem;
+    min-height: 31rem;
+    padding: 1.2rem 1rem 1.5rem;
+    isolation: isolate;
+  }
+
+  .hero-main::before {
+    position: absolute;
+    z-index: -1;
+    top: 7.5rem;
+    right: -4.2rem;
+    width: 15rem;
+    height: 15rem;
+    border: 1px solid #15151535;
+    border-radius: 50%;
+    content: "";
+    box-shadow: 0 0 0 1.5rem #ffffff12, 0 0 0 3rem #ffffff12;
   }
 
   .hero-copy {
@@ -89,57 +119,75 @@ import { withBase } from "../utils/site";
   }
 
   .hero-hello {
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 0.5rem;
     font-family: "Space Mono", monospace;
-    font-size: 0.78rem;
+    font-size: 0.52rem;
     font-weight: 700;
   }
 
   .hero h1 {
     font-family: "Dela Gothic One", sans-serif;
-    font-size: clamp(2.55rem, 13vw, 4rem);
-    line-height: 0.99;
+    font-size: clamp(2.9rem, 14.3vw, 4.25rem);
+    line-height: 0.91;
     letter-spacing: -0.08em;
   }
 
   .hero h1 > span:not(.hero-heart) {
+    display: inline-block;
+    font-size: 0.84em;
+    letter-spacing: -0.06em;
+    white-space: nowrap;
     color: #fffdfa;
     -webkit-text-stroke: 1px #151515;
-    text-shadow: 3px 3px 0 #151515;
+    text-shadow: 4px 4px 0 #151515;
   }
 
   .hero h1 .hero-heart {
-    color: #ff6b6b;
-    text-decoration: underline;
-    text-decoration-thickness: 3px;
-    text-underline-offset: 3px;
+    display: inline-block;
+    transform: rotate(-3deg);
+    color: #fbe38e;
+    text-shadow: 3px 3px 0 #151515;
+    animation: word-wiggle 3s ease-in-out infinite;
   }
 
   .hero-intro {
-    max-width: 16rem;
-    margin-top: 0.9rem;
-    font-size: 0.8rem;
-    line-height: 1.5;
+    max-width: 13rem;
+    margin-top: 0.8rem;
+    border-left: 2px solid #151515;
+    padding-left: 0.6rem;
+    font-size: 0.76rem;
+    line-height: 1.45;
   }
 
   .portrait-wrap {
     position: absolute;
-    right: 0.6rem;
-    bottom: 0.4rem;
-    width: 8rem;
-    height: 8rem;
-    transform: rotate(7deg);
+    right: 0.9rem;
+    bottom: 0.85rem;
+    width: 9.5rem;
+    height: 9.5rem;
+    transform: rotate(8deg);
   }
 
   .portrait-wrap img {
     width: 100%;
     height: 100%;
-    border: 1.5px solid #151515;
-    border-radius: 50%;
+    border: 2px solid #151515;
+    border-radius: 47% 53% 49% 51%;
     background: #a3d8e2;
     object-fit: cover;
-    box-shadow: 4px 4px 0 #151515;
-    animation: portrait-float 4s ease-in-out infinite;
+    box-shadow: 5px 5px 0 #151515;
+    animation: portrait-float 3.4s ease-in-out infinite;
+  }
+
+  .portrait-wrap::before {
+    position: absolute;
+    inset: -0.65rem;
+    border: 1px dashed #151515;
+    border-radius: 50%;
+    content: "";
+    animation: orbit-turn 24s linear infinite;
   }
 
   .portrait-note {
@@ -151,22 +199,55 @@ import { withBase } from "../utils/site";
     font-family: "Space Mono", monospace;
     font-size: 0.55rem;
     font-weight: 700;
+    animation: note-rock 3s ease-in-out infinite;
   }
 
   .portrait-spark {
     position: absolute;
     top: -0.55rem;
     right: -0.45rem;
-    color: #ff6b6b;
-    font-size: 2rem;
+    color: #fbe38e;
+    font-size: 2.4rem;
     -webkit-text-stroke: 1px #151515;
-    animation: spark-turn 12s linear infinite;
+    animation: spark-turn 8s linear infinite;
+  }
+
+  .portrait-sticker {
+    position: absolute;
+    right: -0.8rem;
+    bottom: 0.1rem;
+    z-index: 2;
+    border: 1px solid #151515;
+    background: #7dffb3;
+    padding: 0.35rem 0.45rem;
+    box-shadow: 2px 2px 0 #151515;
+    font-family: "Space Mono", monospace;
+    font-size: 0.48rem;
+    font-weight: 700;
+    line-height: 1.25;
+    transform: rotate(-8deg);
+  }
+
+  .hero-orbit-word {
+    position: absolute;
+    top: 15.1rem;
+    right: -4.1rem;
+    z-index: -1;
+    width: 12rem;
+    color: #15151540;
+    font-family: "Space Mono", monospace;
+    font-size: 0.48rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    white-space: nowrap;
+    transform: rotate(90deg);
+    transform-origin: left center;
   }
 
   .hero-bottom {
     min-height: 3.5rem;
     border-top: 1.5px solid #151515;
-    background: #fffdfa;
+    background: #fbe38e;
   }
 
   .hero-contact {
@@ -197,15 +278,46 @@ import { withBase } from "../utils/site";
 
   .hero-socials a:active {
     transform: translate(2px, 2px);
-    background: #a3d8e2;
+    background: #7dffb3;
   }
 
   @keyframes portrait-float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-8px) rotate(2deg); }
   }
 
   @keyframes spark-turn {
     to { transform: rotate(360deg); }
+  }
+
+  @keyframes orbit-turn {
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes note-rock {
+    0%, 100% { transform: rotate(-10deg); }
+    50% { transform: rotate(-5deg) translateY(-2px); }
+  }
+
+  @keyframes word-wiggle {
+    0%, 84%, 100% { transform: rotate(-3deg) translateY(0); }
+    90% { transform: rotate(2deg) translateY(-3px); }
+    95% { transform: rotate(-5deg) translateY(1px); }
+  }
+
+  @keyframes status-pulse {
+    50% { box-shadow: 0 0 0 5px #7dffb322; }
+  }
+
+  @media (hover: hover) {
+    .hero-socials a:hover {
+      transform: translate(-2px, -2px) rotate(-5deg);
+      background: #7dffb3;
+      box-shadow: 3px 3px 0 #151515;
+    }
+
+    .portrait-wrap:hover img {
+      transform: rotate(-5deg) scale(1.04);
+    }
   }
 </style>

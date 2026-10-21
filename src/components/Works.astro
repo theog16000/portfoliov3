@@ -18,7 +18,8 @@ const sortedWorks = works.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 
     </a>
   </div>
 
-  <div class="work-list">
+  <p class="work-hint">SWIPE TO FLIP THROUGH <span aria-hidden="true">↔</span></p>
+  <div class="work-list" aria-label="Selected projects. Swipe horizontally to browse." tabindex="0">
     {sortedWorks.map((work, index) => {
       const slug = work.id.replace(/\.md$/, "");
       return (
@@ -85,23 +86,58 @@ const sortedWorks = works.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 
     white-space: nowrap;
   }
 
+  .work-hint {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0.2rem 0 0.65rem;
+    font-family: "Space Mono", monospace;
+    font-size: 0.54rem;
+    font-weight: 700;
+  }
+
+  .work-hint span {
+    font-size: 1.1rem;
+    animation: hint-nudge 1.8s ease-in-out infinite;
+  }
+
   .work-list {
     display: grid;
-    gap: 1rem;
+    grid-auto-columns: minmax(82%, 1fr);
+    grid-auto-flow: column;
+    gap: 0.9rem;
+    margin-right: -1rem;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    padding: 0.25rem 1rem 0.9rem 0.15rem;
+    scroll-padding-inline: 0.15rem;
+    scroll-snap-type: x mandatory;
+    scrollbar-color: #151515 #f4efe9;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
   }
 
   .work-card {
     display: block;
+    min-width: 0;
+    scroll-snap-align: start;
     color: #151515;
     text-decoration: none;
+    transform: rotate(-1deg);
+    transition: transform 220ms ease;
+  }
+
+  .work-card:nth-child(even) {
+    transform: rotate(1deg);
   }
 
   .work-image {
     position: relative;
-    height: 12rem;
+    height: 13rem;
     overflow: hidden;
     border: 1.5px solid #151515;
     background: #a3d8e2;
+    box-shadow: 3px 3px 0 #151515;
   }
 
   .work-card:nth-child(2n) .work-image {
@@ -117,6 +153,11 @@ const sortedWorks = works.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 
 
   .work-card:active .work-image img {
     transform: scale(1.04);
+  }
+
+  .work-card:active,
+  .work-card:nth-child(even):active {
+    transform: rotate(0) scale(0.985);
   }
 
   .work-index {
@@ -178,5 +219,23 @@ const sortedWorks = works.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 
     place-items: center;
     border: 1px solid #151515;
     background: #fbe38e;
+    transition: transform 220ms ease, background-color 220ms ease;
+  }
+
+  @media (hover: hover) {
+    .work-card:hover,
+    .work-card:nth-child(even):hover {
+      transform: rotate(0) translateY(-4px);
+    }
+
+    .work-card:hover .work-arrow {
+      transform: rotate(45deg);
+      background: #7dffb3;
+    }
+  }
+
+  @keyframes hint-nudge {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(5px); }
   }
 </style>

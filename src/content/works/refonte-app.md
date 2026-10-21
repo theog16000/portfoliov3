@@ -1,6 +1,7 @@
 ---
 title: "App Redesign"
 description: A complete neo-brutalist user interface.
+image: /images/app-redesign.svg
 category: Development
 tags:
   - UI/UX

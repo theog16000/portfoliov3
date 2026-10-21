@@ -22,7 +22,7 @@ import { withBase } from "../utils/site";
         I’m a developer and web designer who loves expressive layouts, playful details, and websites that feel like they belong to real people.
       </p>
       <p>
-        I bring design and code together to make clear, memorable experiences — from the first sketch to the final interaction.
+        I bring design and code together to make clear, memorable experiences from the first sketch to the final interaction.
       </p>
     </section>
 
@@ -75,6 +75,8 @@ import { withBase } from "../utils/site";
     background: #fbe38e;
     object-fit: cover;
     transform: rotate(7deg);
+    animation: portrait-drift 5s ease-in-out infinite;
+    transition: transform 300ms ease;
   }
 
   .about-hero > div {
@@ -129,6 +131,12 @@ import { withBase } from "../utils/site";
     border-bottom: 1px solid #15151540;
     padding: 0.75rem 0;
     font-size: 0.78rem;
+    transition: padding 180ms ease, background-color 180ms ease;
+  }
+
+  .about-facts div:active {
+    padding-inline: 0.5rem;
+    background: #fbe38e;
   }
 
   .about-facts strong {
@@ -152,5 +160,32 @@ import { withBase } from "../utils/site";
     font-size: 0.65rem;
     font-weight: 700;
     text-decoration: none;
+    transition: transform 180ms ease, box-shadow 180ms ease;
+  }
+
+  .about-link:active {
+    transform: translate(3px, 3px);
+    box-shadow: none;
+  }
+
+  @media (hover: hover) {
+    .about-hero:hover img {
+      transform: rotate(-3deg) scale(1.05);
+    }
+
+    .about-facts div:hover {
+      padding-inline: 0.5rem;
+      background: #fbe38e;
+    }
+
+    .about-link:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 5px 5px 0 #151515;
+    }
+  }
+
+  @keyframes portrait-drift {
+    0%, 100% { translate: 0 0; }
+    50% { translate: 0 -6px; }
   }
 </style>
