@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection, render } from 'astro:content';
-import { withBase } from '../../utils/site';
+import { getCanonicalUrl, withBase } from '../../utils/site';
 
 export async function getStaticPaths() {
   const works = await getCollection('works');
@@ -23,7 +23,26 @@ if (!work) {
 const { Content } = await render(work);
 ---
 
-<Layout title={`${work.data.title} — Théo Genty`}>
+<Layout
+  title={`${work.data.title} — Projet de Théo Genty`}
+  description={work.data.description ?? `${work.data.title} : projet de design et de développement web réalisé par Théo Genty.`}
+  image={work.data.image}
+  structuredData={{
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: work.data.title,
+    description: work.data.description,
+    image: work.data.image,
+    url: getCanonicalUrl(Astro.url.pathname),
+    creator: {
+      "@type": "Person",
+      name: "Théo Genty",
+      url: "https://theogenty.fr/",
+    },
+    keywords: work.data.tags?.join(", "),
+    isPartOf: "https://theogenty.fr/",
+  }}
+>
   <section class="project-detail page-arrive">
     <div class="detail-kicker"><span>PROJECT FILE</span><span>03 / 04</span></div>
     

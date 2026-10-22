@@ -8,7 +8,7 @@ import Star40 from "./stars/Star40";
 <section class="hero page-arrive">
   <div class="hero-top">
     <span>THÉO GENTY / PORTFOLIO</span>
-    <span>FRANCE · 2026</span>
+
   </div>
 
   <div class="hero-main">
@@ -16,7 +16,9 @@ import Star40 from "./stars/Star40";
       <p class="hero-hello">WEB DESIGNER &amp; DEVELOPER</p>
       <h1>Hi, I’m<br /><span>Théo.</span></h1>
       <p class="hero-intro">
-        I design and build websites. Recent work: Hypnomelia and a dashboard redesign.
+        I design and build websites. Recent work:
+        <a href={withBase("/works/hypnomelia-1")}>Hypnomelia</a> and a
+        <a href={withBase("/works/refonte-app")}>dashboard redesign</a>.
       </p>
     </div>
     <div class="portrait-wrap" aria-label="Illustrated portrait of Théo">
@@ -124,6 +126,18 @@ import Star40 from "./stars/Star40";
     padding-left: 0.6rem;
     font-size: 0.78rem;
     line-height: 1.5;
+  }
+
+  .hero-intro a {
+    color: inherit;
+    font-weight: 700;
+    text-decoration-color: #15151580;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.16em;
+  }
+
+  .hero-intro a:hover {
+    text-decoration-thickness: 2px;
   }
 
   .portrait-wrap {

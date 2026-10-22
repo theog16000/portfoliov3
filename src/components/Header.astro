@@ -1,30 +1,32 @@
 ---
-import { House, UserRound, BriefcaseBusiness, Mail } from "lucide-astro";
 import { withBase } from "../utils/site";
 
 const links = [
-  { href: withBase("/"), label: "Home", icon: House, color: "#FBE38E" },
-  { href: withBase("/about"), label: "About", icon: UserRound, color: "#7DFFB3" },
-  { href: withBase("/projets"), label: "Work", icon: BriefcaseBusiness, color: "#A3D8E2" },
-  { href: withBase("/contact"), label: "Contact", icon: Mail, color: "#FF94B9" },
+  { href: withBase("/"), label: "Home", color: "#FBE38E" },
+  { href: withBase("/about"), label: "About", color: "#7DFFB3" },
+  { href: withBase("/projets"), label: "Work", color: "#A3D8E2" },
+  { href: withBase("/contact"), label: "Contact", color: "#FF94B9" },
 ];
 ---
 
 <header class="mobile-header">
-  <a href={withBase("/")} class="identity" aria-label="Théo Genty — home">
-    <img src={withBase("/images/theo.webp")} alt="" />
+  <div class="identity">
+    <a href={withBase("/")} class="identity-home" aria-label="Home">
+      <img src={withBase("/images/theo.webp")} alt="" />
+    </a>
     <span>
-      <strong>THÉO GENTY</strong>
+      <button class="identity-name" type="button" aria-label="Théo Genty">
+        THÉO GENTY
+      </button>
       <small>DESIGN + FRONT-END</small>
     </span>
-  </a>
+  </div>
   <span class="availability"><i></i> AVAILABLE FOR WORK</span>
 </header>
 
 <nav class="mobile-dock" aria-label="Main navigation">
-  {links.map(({ href, label, icon: Icon, color }) => (
+  {links.map(({ href, label, color }) => (
     <a href={href} data-astro-reload data-curtain-color={color} class="dock-link">
-      <Icon size={19} strokeWidth={2.2} aria-hidden="true" />
       <span>{label}</span>
     </a>
   ))}
@@ -48,11 +50,15 @@ const links = [
     display: flex;
     align-items: center;
     gap: 0.65rem;
+  }
+
+  .identity-home {
+    display: block;
     color: #151515;
     text-decoration: none;
   }
 
-  .identity img {
+  .identity-home img {
     width: 2.75rem;
     height: 2.75rem;
     border: 1.5px solid #151515;
@@ -61,15 +67,27 @@ const links = [
     box-shadow: 2px 2px 0 #151515;
   }
 
-  .identity strong,
+  .identity-name,
   .identity small {
     display: block;
   }
 
-  .identity strong {
+  .identity-name {
+    margin: 0;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    color: inherit;
+    cursor: pointer;
     font-family: "Dela Gothic One", sans-serif;
     font-size: 0.8rem;
     letter-spacing: -0.04em;
+  }
+
+  .identity-name:focus-visible {
+    border-radius: 0.2rem;
+    outline: 2px solid #151515;
+    outline-offset: 3px;
   }
 
   .identity small {
@@ -99,69 +117,41 @@ const links = [
 
   .mobile-dock {
     position: fixed;
-    inset: auto 0 0;
+    inset: auto 0 calc(0.65rem + env(safe-area-inset-bottom));
     z-index: 50;
     display: grid;
-    width: min(100%, 480px);
+    width: min(100% - 1.5rem, 31rem);
     grid-template-columns: repeat(4, 1fr);
     margin: 0 auto;
-    border: 1.5px solid #151515;
-    border-bottom: 0;
-    border-radius: 1rem 1rem 0 0;
+    border: 1px solid #151515;
+    border-radius: 999px;
     background: #fffdfa;
-    padding: 0.55rem 0.75rem calc(0.55rem + env(safe-area-inset-bottom));
-    box-shadow: 0 -5px 20px #15151510;
+    padding: 0.35rem;
+    box-shadow: 0 4px 16px #15151518;
   }
 
   .dock-link {
     display: flex;
-    min-height: 3.1rem;
-    flex-direction: column;
+    position: relative;
+    min-height: 2.75rem;
     align-items: center;
     justify-content: center;
-    gap: 0.2rem;
-    border-radius: 0.6rem;
+    border-radius: 999px;
     color: #151515;
-    font-family: "Space Mono", monospace;
-    font-size: 0.58rem;
-    font-weight: 700;
+    font-size: 0.8rem;
+    font-weight: 500;
     text-decoration: none;
-    transition: background-color 160ms ease, transform 160ms ease;
-  }
-
-  .dock-link:active {
-    transform: scale(0.94);
-    background: #fbe38e;
-  }
-
-  .dock-link svg {
-    transition: transform 180ms ease;
-  }
-
-  .dock-link:active svg {
-    transform: translateY(-3px) rotate(-8deg);
+    transition: background-color 160ms ease;
   }
 
   .dock-link[aria-current="page"] {
+    font-weight: 700;
     background: #fbe38e;
   }
 
   @media (hover: hover) {
     .dock-link:hover {
-      transform: translateY(-3px);
       background: #fbe38e;
-    }
-
-    .dock-link:hover svg {
-      transform: rotate(-8deg);
-    }
-  }
-
-  @media (min-width: 680px) {
-    .mobile-dock {
-      width: min(100%, 42rem);
-      border-radius: 1rem 1rem 0 0;
-      padding-inline: 1.25rem;
     }
   }
 </style>
@@ -250,4 +240,16 @@ const links = [
       timeout = window.setTimeout(() => go(), 1200);
     });
   }
+</script>
+
+<script>
+  const nameButton = document.querySelector<HTMLButtonElement>(".identity-name");
+  let nameClickCount = 0;
+
+  nameButton?.addEventListener("click", () => {
+    nameClickCount += 1;
+    if (nameClickCount === 10) {
+      window.location.href = "https://www.youtube.com/watch?v=ZHwVBirqD2s";
+    }
+  });
 </script>
