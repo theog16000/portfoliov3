@@ -1,6 +1,6 @@
 ---
 title: "App Redesign"
-description: A complete neo-brutalist user interface.
+description: A dashboard redesign with bold colour, chunky type, and playful data cards.
 image: /images/app-redesign.svg
 category: Development
 tags:
@@ -12,9 +12,4 @@ order: 1
 
 ## About the project
 
-This project is a complete redesign of a SaaS application. The goal was to modernize the user experience while preserving a bold and distinctive visual identity.
-
-### Main goals:
-- **Performance:** Fast loading times powered by Astro.
-- **Visual identity:** A confident neo-brutalist design.
-- **Usability:** Improved user journeys.
+I made this dashboard-style interface to explore a louder visual direction for a familiar app layout. It’s built with Astro and Tailwind, using bright colour, oversized labels, and simple data cards.
