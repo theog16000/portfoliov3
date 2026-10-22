@@ -1,10 +1,15 @@
 ---
+import Star33 from "./stars/Star33";
 ---
 
 <div class="ticker" aria-label="Design, code, and the details in between">
   <div class="ticker-track" aria-hidden="true">
     {Array.from({ length: 4 }, () => (
-      <span>DESIGN <b>✳</b> CODE <b>✳</b> ONE MORE TINY FIX <b>✳</b></span>
+      <span>
+        DESIGN <Star33 className="ticker-star" size={20} color="#FBE38E" stroke="black" strokeWidth={7} />
+        CODE <Star33 className="ticker-star" size={20} color="#A3D8E2" stroke="black" strokeWidth={7} />
+        ONE MORE TINY FIX <Star33 className="ticker-star" size={20} color="#FF6B6B" stroke="black" strokeWidth={7} />
+      </span>
     ))}
   </div>
 </div>
@@ -15,7 +20,7 @@
     margin: 2.5rem -1rem 0;
     overflow: hidden;
     border-block: 1.5px solid #151515;
-    background: #7dffb3;
+    background: transparent;
     padding: 0.9rem 0;
   }
 
@@ -36,8 +41,8 @@
     letter-spacing: 0.02em;
   }
 
-  .ticker-track b {
-    color: #ff6b6b;
-    font-size: 1rem;
+  .ticker-star {
+    flex: 0 0 auto;
+    overflow: visible;
   }
 </style>

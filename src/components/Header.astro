@@ -23,8 +23,8 @@ const links = [
 
 <nav class="mobile-dock" aria-label="Main navigation">
   {links.map(({ href, label, icon: Icon, color }) => (
-    <a href={href} data-astro-reload data-curtain-color={color} class="dock-link" aria-label={label}>
-      <Icon size={19} strokeWidth={2.2} />
+    <a href={href} data-astro-reload data-curtain-color={color} class="dock-link">
+      <Icon size={19} strokeWidth={2.2} aria-hidden="true" />
       <span>{label}</span>
     </a>
   ))}
@@ -157,10 +157,11 @@ const links = [
     }
   }
 
-  @media (min-width: 768px) {
-    .mobile-header,
+  @media (min-width: 680px) {
     .mobile-dock {
-      display: none;
+      width: min(100%, 42rem);
+      border-radius: 1rem 1rem 0 0;
+      padding-inline: 1.25rem;
     }
   }
 </style>
