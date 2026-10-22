@@ -1,11 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
   <rect x="4" y="4" width="120" height="120" rx="30" fill="#F4EFE9"/>
-  <path
-    d="M59.1 52.5C23.6-33.3 63.5 10.4 64 56.7c.5-46.3 40.4-90 4.9-4.2 35.5-85.8 32.4-26.3-.4 6.6 32.8-32.9 92.3-35.9 6.6-.4 85.7-35.5 41.3 4.4-4.9 4.4 46.3 0 90.5 39.9 4.9 4.4 85.6 35.5 26.2 32.4-6.6-.4 32.8 32.9 35.8 92.4.4 6.6 35.5 85.8-4.5 41.5-4.9-4.2-.5 46.3-40.4 90-4.9 4.2-35.5 85.8-32.4 26.3.4-6.6-32.8 32.9-92.3 35.9-6.6.4-85.7 35.5-41.4-4.4 4.9-4.4-46.3 0-90.5-39.9-4.9-4.4-85.6-35.5-26.2-32.4 6.6.4-32.8-32.8-35.8-92.3-.4-6.5"
-    fill="#FF6B6B"
-    stroke="#151515"
-    stroke-linejoin="round"
-    stroke-width="6"
-  />
-  <circle cx="64" cy="64" r="11" fill="#FBE38E" stroke="#151515" stroke-width="5"/>
+  <g fill="#FF6B6B" stroke="#151515" stroke-linejoin="round" stroke-width="5">
+    <ellipse cx="64" cy="33" rx="14" ry="24"/>
+    <ellipse cx="64" cy="33" rx="14" ry="24" transform="rotate(45 64 64)"/>
+    <ellipse cx="64" cy="33" rx="14" ry="24" transform="rotate(90 64 64)"/>
+    <ellipse cx="64" cy="33" rx="14" ry="24" transform="rotate(135 64 64)"/>
+    <ellipse cx="64" cy="33" rx="14" ry="24" transform="rotate(180 64 64)"/>
+    <ellipse cx="64" cy="33" rx="14" ry="24" transform="rotate(225 64 64)"/>
+    <ellipse cx="64" cy="33" rx="14" ry="24" transform="rotate(270 64 64)"/>
+    <ellipse cx="64" cy="33" rx="14" ry="24" transform="rotate(315 64 64)"/>
+  </g>
+  <circle cx="64" cy="64" r="14" fill="#FBE38E" stroke="#151515" stroke-width="5"/>
 </svg>
