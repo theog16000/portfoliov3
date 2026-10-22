@@ -2,7 +2,7 @@
 
 Bienvenue sur mon portfolio ! Je suis Théo Genty, designer et développeur web. J’y présente les projets que j’ai réalisés, mon approche du design et du développement, et un formulaire pour me contacter.
 
-**Voir le site :** [theog16000.github.io/portfoliov3](https://theog16000.github.io/portfoliov3/)
+**Voir le site :** [theogenty.fr](https://theogenty.fr)
 
 ## Fonctionnalités
 
@@ -30,7 +30,7 @@ npm ci
 npm run dev
 ```
 
-Astro affiche l’adresse locale dans le terminal. Avec la configuration GitHub Pages actuelle, le site est servi sous `/portfoliov3/` en production.
+Astro affiche l’adresse locale dans le terminal. En local, le site utilise le préfixe `/portfoliov3/` pour rester compatible avec GitHub Pages.
 
 ## Commandes disponibles
 
@@ -66,7 +66,9 @@ Les champs `title` sont obligatoires. `description`, `image`, `category`, `tags`
 
 ## Déploiement
 
-Chaque push sur la branche `main` lance le workflow `.github/workflows/deploy.yml`. Celui-ci installe les dépendances, exécute `npm run build` et publie le contenu de `dist/` sur GitHub Pages. Le workflow peut également être lancé manuellement depuis l’onglet **Actions** du dépôt.
+Chaque push sur la branche `main` lance le workflow `.github/workflows/deploy.yml`, qui publie une version miroir sur GitHub Pages à l’adresse `https://theog16000.github.io/portfoliov3/`. Le domaine personnalisé `theogenty.fr` est servi par Vercel ; les builds Vercel utilisent automatiquement la racine `/` afin que les pages et leurs feuilles de style soient chargées au bon emplacement.
+
+Le DNS du domaine est géré chez o2switch et pointe vers Vercel. Pour vérifier ou modifier le domaine, consulte les domaines associés au projet dans le tableau de bord Vercel et utilise les valeurs DNS qui y sont indiquées. Ne remplace pas ces entrées par celles de GitHub Pages sans migrer aussi l’hébergement et sa configuration.
 
 ## Contact
 
