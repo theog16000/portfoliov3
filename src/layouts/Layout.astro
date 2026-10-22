@@ -1,14 +1,47 @@
 ---
 import Header from "../components/Header.astro";
-import { withBase } from "../utils/site";
+import { getCanonicalUrl, withBase } from "../utils/site";
 import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
 
 interface Props {
   title?: string;
+  description?: string;
+  image?: string;
+  noindex?: boolean;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
-const { title = "Portfolio — Théo Genty" } = Astro.props;
+const {
+  title = "Théo Genty — Designer et développeur web",
+  description = "Je suis Théo Genty, designer et développeur web. Découvrez mes projets de création de sites, de design d’interface et de développement front-end.",
+  image = "/images/theo.webp",
+  noindex = false,
+  structuredData,
+} = Astro.props;
+const canonicalUrl = getCanonicalUrl(Astro.url.pathname);
+const socialImage = new URL(image, "https://theogenty.fr").href;
+const pageStructuredData = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Théo Genty — Portfolio",
+    url: "https://theogenty.fr/",
+    inLanguage: ["fr-FR", "en"],
+    author: {
+      "@type": "Person",
+      name: "Théo Genty",
+      url: "https://theogenty.fr/",
+      jobTitle: "Designer et développeur web",
+      image: "https://theogenty.fr/images/theo.webp",
+      sameAs: [
+        "https://github.com/theog16000",
+        "https://fr.linkedin.com/in/theogty",
+      ],
+    },
+  },
+  ...(structuredData ? (Array.isArray(structuredData) ? structuredData : [structuredData]) : []),
+];
 ---
 
 <html lang="en">
@@ -16,6 +49,24 @@ const { title = "Portfolio — Théo Genty" } = Astro.props;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow"} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" type="image/svg+xml" href={withBase("/favicon.svg")} />
+    <meta name="theme-color" content="#f4efe9" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Théo Genty — Portfolio" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:alt" content="Portrait illustré de Théo Genty" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <script type="application/ld+json" set:html={JSON.stringify(pageStructuredData)} />
     <ClientRouter />
 
     <style is:global>

@@ -7,7 +7,7 @@ const isVercel = process.env.VERCEL === '1';
 
 // https://astro.build/config
 export default defineConfig({
-  site: isVercel ? 'https://theogenty.fr' : 'https://theog16000.github.io',
+  site: 'https://theogenty.fr',
   base: isVercel ? '/' : '/portfoliov3',
   integrations: [react()],
 

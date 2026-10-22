@@ -12,6 +12,7 @@ Bienvenue sur mon portfolio ! Je suis Théo Genty, designer et développeur web.
 - Navigation au clavier, lien d’accès direct au contenu et indicateurs de focus.
 - Choix de la langue (français ou anglais) et options d’accessibilité : taille du texte, police sans empattement adaptée à la dyslexie, contraste renforcé et réduction des animations. Les préférences sont enregistrées dans le navigateur.
 - Formulaire de contact transmis par FormSubmit à `theogenty8@gmail.com`.
+- Métadonnées SEO par page, données structurées, sitemap XML et règles d’indexation.
 
 ## Technologies
 
@@ -69,6 +70,8 @@ Les champs `title` sont obligatoires. `description`, `image`, `category`, `tags`
 Chaque push sur la branche `main` lance le workflow `.github/workflows/deploy.yml`, qui publie une version miroir sur GitHub Pages à l’adresse `https://theog16000.github.io/portfoliov3/`. Le domaine personnalisé `theogenty.fr` est servi par Vercel ; les builds Vercel utilisent automatiquement la racine `/` afin que les pages et leurs feuilles de style soient chargées au bon emplacement.
 
 Le DNS du domaine est géré chez o2switch et pointe vers Vercel. Pour vérifier ou modifier le domaine, consulte les domaines associés au projet dans le tableau de bord Vercel et utilise les valeurs DNS qui y sont indiquées. Ne remplace pas ces entrées par celles de GitHub Pages sans migrer aussi l’hébergement et sa configuration.
+
+Le sitemap est disponible sur `https://theogenty.fr/sitemap.xml` et le fichier d’indexation sur `https://theogenty.fr/robots.txt`. Pour faciliter le suivi de l’indexation, ajoute le domaine dans Google Search Console et soumets-y le sitemap.
 
 ## Contact
 
