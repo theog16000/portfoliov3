@@ -129,18 +129,24 @@ import Layout from "../layouts/Layout.astro";
             },
             body: JSON.stringify(payload),
           });
-          const result: { success?: boolean | string } = await response.json();
+          const result: { success?: boolean | string; message?: string } = await response.json();
 
-          if (!response.ok || (result.success !== true && result.success !== "true")) {
-            throw new Error("FormSubmit did not accept the message.");
+          if (!response.ok || String(result.success).toLowerCase() !== "true") {
+            const serviceMessage = result.message?.trim();
+            if (serviceMessage && /activat/i.test(serviceMessage)) {
+              throw new Error("FormSubmit needs to be activated first. Check theo.genty@icloud.com for its confirmation email, then try again.");
+            }
+            throw new Error(serviceMessage || "The message was not accepted. Please try again or email me directly.");
           }
 
           status.dataset.state = "success";
           status.textContent = "Message sent! Thanks for getting in touch — I’ll reply as soon as I can.";
           form.reset();
-        } catch {
+        } catch (error) {
           status.dataset.state = "error";
-          status.textContent = "Your message couldn’t be sent. Please try again or email me directly.";
+          status.textContent = error instanceof Error
+            ? error.message
+            : "Your message couldn’t be sent. Check your connection and try again, or email me directly.";
         } finally {
           form.dataset.submitting = "false";
           submitButton.disabled = false;
