@@ -50,4 +50,4 @@ Ce choix relie le travail de conception à une implémentation dans un outil de 
 
 ## Résultat
 
-Le projet aboutit à une refonte du site d’Hypnomelia conçue dans Figma puis intégrée sur WordPress avec Bricks Builder. Le site est consultable à l’adresse [hypnomelia.fr](https://hypnomelia.fr).
+Le projet aboutit à une refonte du site d’Hypnomelia conçue dans Figma puis intégrée sur WordPress avec Bricks Builder. Le site est consultable à l’adresse [hypnomelia.fr](https://hypnomelia.fr/).
