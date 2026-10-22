@@ -22,7 +22,7 @@ import Layout from "../layouts/Layout.astro";
       <form
         id="contact-form"
         class="contact-form"
-        action="https://formsubmit.co/theo.genty@icloud.com"
+        action="https://formsubmit.co/theogenty8@gmail.com"
         method="POST"
       >
         <input type="hidden" name="_subject" value="New portfolio message" />
@@ -84,10 +84,10 @@ import Layout from "../layouts/Layout.astro";
           </p>
         </div>
         <a
-          href="mailto:theo.genty@icloud.com"
+          href="mailto:theogenty8@gmail.com"
           class="email-link"
         >
-          theo.genty@icloud.com
+          theogenty8@gmail.com
         </a>
       </aside>
     </div>
@@ -121,7 +121,7 @@ import Layout from "../layouts/Layout.astro";
         status.textContent = "Sending your message…";
 
         try {
-          const response = await fetch("https://formsubmit.co/ajax/theo.genty@icloud.com", {
+          const response = await fetch("https://formsubmit.co/ajax/theogenty8@gmail.com", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -134,7 +134,7 @@ import Layout from "../layouts/Layout.astro";
           if (!response.ok || String(result.success).toLowerCase() !== "true") {
             const serviceMessage = result.message?.trim();
             if (serviceMessage && /activat/i.test(serviceMessage)) {
-              throw new Error("FormSubmit needs to be activated first. Check theo.genty@icloud.com for its confirmation email, then try again.");
+              throw new Error("FormSubmit needs to be activated first. Check theogenty8@gmail.com for its confirmation email, then try again.");
             }
             throw new Error(serviceMessage || "The message was not accepted. Please try again or email me directly.");
           }
