@@ -4,6 +4,7 @@ import Figma from "./icons/figma.svg";
 import Tailwind from "./icons/tailwind.svg";
 import Vue from "./icons/vue.svg";
 import Github from "./icons/github.svg";
+import Star33 from "./stars/Star33";
 
 const tools = [
   { name: "Figma", icon: Figma },
@@ -25,7 +26,7 @@ const tools = [
         <span class="tool-number">0{index + 1}</span>
         <Icon class="tool-icon" />
         <span class="tool-name">{name}</span>
-        <span class="tool-star" aria-hidden="true">✳</span>
+        <Star33 className="tool-star" size={26} color="#FF6B6B" stroke="black" strokeWidth={7} aria-hidden="true" />
       </div>
     ))}
   </div>
@@ -92,8 +93,8 @@ const tools = [
   }
 
   .tool-star {
-    color: #ff6b6b;
-    font-size: 1.1rem;
+    display: block;
+    overflow: visible;
     transition: transform 300ms ease;
   }
 

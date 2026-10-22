@@ -190,3 +190,311 @@
     transition-duration: 1ms !important;
   }
 }
+
+@media (min-width: 680px) {
+  .home-bento {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-areas:
+      "hero hero hero hero hero hero"
+      "tools tools tools services services services"
+      "ticker ticker ticker ticker ticker ticker"
+      "works works works works works works";
+    gap: 1rem;
+  }
+
+  .home-bento > .hero {
+    grid-area: hero;
+    min-height: 31rem;
+    box-shadow: 6px 6px 0 #151515;
+  }
+
+  .home-bento > .hero .hero-main {
+    min-height: 25rem;
+    padding: 2rem;
+  }
+
+  .home-bento > .hero .hero-hello {
+    font-size: 0.62rem;
+  }
+
+  .home-bento > .hero h1 {
+    font-size: clamp(4.5rem, 10vw, 7.5rem);
+  }
+
+  .home-bento > .hero .hero-intro {
+    max-width: 20rem;
+    font-size: 0.9rem;
+  }
+
+  .home-bento > .hero .portrait-wrap {
+    right: 3rem;
+    bottom: 2rem;
+    width: clamp(11rem, 22vw, 17rem);
+    height: clamp(11rem, 22vw, 17rem);
+  }
+
+  .home-bento > .hero .hero-spark-one {
+    top: 2rem;
+    right: 3rem;
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .home-bento > .hero .hero-spark-two {
+    right: 23rem;
+    bottom: 4rem;
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .home-bento > .tool-section {
+    grid-area: tools;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 0;
+    border: 1.5px solid #151515;
+    background: #fbe38e;
+    padding: 1.5rem;
+    box-shadow: 4px 4px 0 #151515;
+    transition: transform 180ms ease, box-shadow 180ms ease;
+  }
+
+  .home-bento > .tool-section .section-heading > span,
+  .home-bento > .services .section-heading > span,
+  .home-bento > .work-section .work-heading > div > span {
+    display: none;
+  }
+
+  .home-bento > .tool-section .section-heading {
+    align-items: start;
+    margin-bottom: 1rem;
+  }
+
+  .home-bento > .tool-section .section-heading h2 {
+    font-size: 2.4rem;
+  }
+
+  .home-bento > .tool-section .tool-list {
+    border-top: 1.5px solid #151515;
+  }
+
+  .home-bento > .tool-section .tool-item {
+    grid-template-columns: 2rem 1fr 1.2rem;
+    min-height: 3.25rem;
+    padding-inline: 0.25rem;
+  }
+
+  .home-bento > .tool-section .tool-number {
+    display: none;
+  }
+
+  .home-bento > .tool-section .tool-icon {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+
+  .home-bento > .tool-section .tool-star {
+    width: 1.65rem;
+    height: 1.65rem;
+  }
+
+  .home-bento > .services {
+    grid-area: services;
+    margin-top: 0;
+    padding: 1.5rem;
+    box-shadow: 4px 4px 0 #151515;
+    transition: transform 180ms ease, box-shadow 180ms ease;
+  }
+
+  .home-bento > .services .section-heading h2 {
+    font-size: 2.2rem;
+    text-align: left;
+  }
+
+  .home-bento > .services .section-heading {
+    margin-bottom: 0.75rem;
+  }
+
+  .home-bento > .services li {
+    grid-template-columns: 1fr 1rem;
+    gap: 0.3rem;
+  }
+
+  .home-bento > .services li > span:first-child {
+    display: none;
+  }
+
+  .home-bento > .services li > span:last-child {
+    color: #ff6b6b;
+    transition: transform 180ms ease;
+  }
+
+  .home-bento > .services li {
+    min-height: 2.65rem;
+    font-size: 0.78rem;
+  }
+
+  .home-bento > .ticker {
+    grid-area: ticker;
+    width: auto;
+    margin: 0;
+    border: 1.5px solid #151515;
+    background: #a3d8e2;
+    padding-block: 1rem;
+    box-shadow: 3px 3px 0 #151515;
+  }
+
+  .home-bento > .ticker .ticker-track span {
+    font-size: 0.85rem;
+  }
+
+  .home-bento > .work-section {
+    grid-area: works;
+    margin-top: 0;
+    border: 1.5px solid #151515;
+    background: #fffdfa;
+    padding: 1.5rem;
+    box-shadow: 4px 4px 0 #151515;
+  }
+
+  .home-bento > .work-section .work-heading {
+    align-items: center;
+  }
+
+  .home-bento > .work-section .work-heading h2 {
+    font-size: 2.25rem;
+  }
+
+  .home-bento > .work-section .work-heading {
+    margin-bottom: 1.25rem;
+  }
+
+  .home-bento > .work-section .work-hint {
+    display: none;
+  }
+
+  .home-bento > .work-section .work-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-columns: auto;
+    grid-auto-flow: row;
+    gap: 1.25rem;
+    margin: 0;
+    overflow: visible;
+    padding: 0.5rem 0.25rem 0.75rem;
+  }
+
+  .home-bento > .work-section .work-card,
+  .home-bento > .work-section .work-card:nth-child(even) {
+    transform: none;
+  }
+
+  .home-bento > .work-section .work-image {
+    height: clamp(15rem, 25vw, 22rem);
+  }
+
+  .home-bento > .work-section .work-index,
+  .home-bento > .work-section .work-category {
+    display: none;
+  }
+
+  .home-bento > .work-section .work-image {
+    box-shadow: 3px 3px 0 #151515;
+    transition: box-shadow 180ms ease;
+  }
+
+  .home-bento > .work-section .work-image img {
+    transition: transform 300ms ease;
+  }
+
+  .home-bento > .work-section .work-arrow {
+    color: #151515;
+  }
+
+  .home-bento > .work-section .work-meta {
+    min-height: 5rem;
+  }
+
+  .home-bento > .work-section .work-meta h3 {
+    font-size: 1.2rem;
+  }
+
+  .home-bento > .work-section .work-meta p {
+    max-width: 32rem;
+    font-size: 0.8rem;
+  }
+}
+
+@media (min-width: 1100px) {
+  .home-bento {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-areas:
+      "hero hero hero hero hero hero hero tools tools tools tools tools"
+      "hero hero hero hero hero hero hero services services services services services"
+      "ticker ticker ticker ticker ticker ticker ticker ticker ticker ticker ticker ticker"
+      "works works works works works works works works works works works works";
+  }
+
+  .home-bento > .hero {
+    min-height: 40rem;
+  }
+
+  .home-bento > .hero .hero-main {
+    min-height: 34rem;
+    padding: 2.5rem;
+  }
+
+  .home-bento > .tool-section {
+    padding: 1.75rem;
+  }
+
+  .home-bento > .services {
+    padding: 1.75rem;
+  }
+}
+
+@media (min-width: 680px) and (hover: hover) {
+  .home-bento > .tool-section:hover,
+  .home-bento > .services:hover {
+    transform: translateY(-3px) rotate(-0.4deg);
+    box-shadow: 7px 7px 0 #151515;
+  }
+
+  .home-bento > .tool-section .tool-item:hover {
+    padding-inline: 0.6rem;
+    background: #fffdfa;
+  }
+
+  .home-bento > .tool-section .tool-item:hover .tool-star {
+    transform: rotate(25deg) scale(1.2);
+  }
+
+  .home-bento > .services li:hover {
+    padding-inline: 0.35rem;
+    background: #fffdfa55;
+  }
+
+  .home-bento > .services li:hover > span:last-child {
+    transform: translate(2px, -2px);
+  }
+
+  .home-bento > .work-section .work-card:hover .work-image {
+    box-shadow: 6px 6px 0 #151515;
+  }
+
+  .home-bento > .work-section .work-card:hover .work-image img {
+    transform: scale(1.035);
+  }
+}
+
+@media (min-width: 680px) and (max-width: 1099px) {
+  .home-bento > .hero .hero-main {
+    min-height: 27rem;
+  }
+
+  .home-bento > .hero .portrait-wrap {
+    right: 2rem;
+    bottom: 1.5rem;
+  }
+}
