@@ -1,0 +1,125 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Instagram, Linkedin, Github, Mail } from "lucide-astro";
+import Star40 from "../components/stars/Star40";
+
+const fields: Array<{
+  name: string;
+  type: "text" | "email";
+  label: string;
+  placeholder: string;
+  autocomplete: string;
+  focus: string;
+}> = [
+  { name: "name", type: "text", label: "NAME *", placeholder: "TON NOM", autocomplete: "name", focus: "focus:bg-[#A3D8E2]" },
+  { name: "email", type: "email", label: "EMAIL *", placeholder: "TOI@EMAIL.COM", autocomplete: "email", focus: "focus:bg-[#7DD8EC]" },
+];
+
+const socials = [
+  { href: "https://instagram.com", label: "Instagram", Icon: Instagram },
+  { href: "https://fr.linkedin.com/in/theogty", label: "LinkedIn", Icon: Linkedin },
+  { href: "https://github.com/theog16000", label: "GitHub", Icon: Github },
+  { href: "mailto:theo.genty@icloud.com", label: "Email", Icon: Mail },
+];
+---
+
+<Layout title="Contact — Théo">
+  <section class="neo-card mb-8">
+    <p class="font-mono font-black text-xs tracking-wider">LET'S TALK</p>
+    <h1 class="neo-title text-outline mt-1">CONTACT</h1>
+    <p class="font-mono font-bold text-[11px] leading-snug mt-2">
+      UN PROJET, UNE QUESTION,<br />ÉCRIS-MOI JUSTE ICI.
+    </p>
+
+    <form id="contact-form" class="mt-4 flex flex-col gap-3" novalidate>
+      {fields.map((field) => (
+        <label class="flex flex-col gap-1">
+          <span class="font-mono font-black text-[10px] tracking-wider">{field.label}</span>
+          <input
+            type={field.type}
+            name={field.name}
+            autocomplete={field.autocomplete}
+            required
+            placeholder={field.placeholder}
+            class:list={["neo-input", field.focus, "focus:shadow-[3px_3px_0px_#000000]"]}
+          />
+        </label>
+      ))}
+
+      <label class="flex flex-col gap-1">
+        <span class="font-mono font-black text-[10px] tracking-wider">MESSAGE *</span>
+        <textarea
+          name="message"
+          required
+          rows="4"
+          placeholder="PARLE-MOI DE TON PROJET…"
+          class="neo-input resize-none focus:bg-[#FBE38E] focus:shadow-[3px_3px_0px_#000000]"
+        ></textarea>
+      </label>
+
+      <p id="contact-error" class="hidden font-mono font-bold text-[11px] text-[#FF6B6B]"></p>
+
+      <button type="submit" class="neo-cta group mt-1 flex items-center justify-center gap-1.5 px-3 py-2.5 text-[12px]">
+        <Star40 color="#5294FF" stroke="black" strokeWidth={10} width={15} height={15} />
+        <span>SEND MESSAGE</span>
+        <Star40 color="#5294FF" stroke="black" strokeWidth={10} width={15} height={15} />
+      </button>
+    </form>
+
+    <div id="contact-success" class="hidden mt-4 border-2 border-black bg-[#7DFFB3] p-4 shadow-[3px_3px_0px_#000000]">
+      <p class="font-dela text-sm uppercase">Message prêt ★</p>
+      <p class="font-mono font-bold text-[11px] leading-snug mt-1">
+        TON APP MAIL S’OUVRE AVEC LE MESSAGE.
+      </p>
+    </div>
+
+    <div class="mt-4 flex items-center justify-between gap-2">
+      <a href="mailto:theo.genty@icloud.com" class="font-mono font-bold text-[10px] underline underline-offset-2">
+        theo.genty@icloud.com
+      </a>
+      <div class="flex items-center gap-1.5">
+        {socials.map(({ href, label, Icon }) => (
+          <a href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" aria-label={label} class="neo-icon">
+            <Icon class="w-4 h-4 stroke-[2.5]" />
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const form = document.getElementById("contact-form") as HTMLFormElement | null;
+    const errorEl = document.getElementById("contact-error");
+    const successEl = document.getElementById("contact-success");
+    if (!form || !errorEl || !successEl) return;
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const name = String(data.get("name") || "").trim();
+      const email = String(data.get("email") || "").trim();
+      const message = String(data.get("message") || "").trim();
+
+      errorEl.classList.add("hidden");
+
+      if (!name || !email || !message) {
+        errorEl.textContent = "REMPLIS TOUS LES CHAMPS ★";
+        errorEl.classList.remove("hidden");
+        return;
+      }
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errorEl.textContent = "EMAIL INVALIDE ★";
+        errorEl.classList.remove("hidden");
+        return;
+      }
+
+      successEl.classList.remove("hidden");
+      const subject = encodeURIComponent(`Portfolio — message de ${name}`);
+      const body = encodeURIComponent(`Nom : ${name}\nEmail : ${email}\n\n${message}`);
+      window.location.href = `mailto:theo.genty@icloud.com?subject=${subject}&body=${body}`;
+    });
+  });
+</script>

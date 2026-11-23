@@ -1,37 +1,31 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection } from "astro:content";
 
-const allWorks = await getCollection('works');
-const sortedWorks = allWorks.sort((a: any, b: any) => a.data.order - b.data.order);
+const works = (await getCollection("works")).sort(
+  (a: any, b: any) => (a.data.order || 0) - (b.data.order || 0)
+);
 ---
 
-<section class="border-2 border-black bg-[#F4EFEA] p-4 shadow-[4px_4px_0px_#000000] mx-auto flex flex-col justify-between max-w-sm w-full">
-    
-    <!-- Titre WORKS -->
-    <h1 class="font-dela text-3xl text-[#F4EFEA] tracking-[-0.011em] text-outline">
-    WORKS
-    </h1>
+<section class="neo-card">
+  <h1 class="neo-title text-outline">WORKS</h1>
 
-    <!-- Conteneur avec scroll horizontal -->
-    <div class="flex gap-4 overflow-x-auto pb-4 mb-4 scrollbar-thin mt-5">
-        {sortedWorks.map((work: any) => (
-            <div class="border-[3px] border-black bg-[#F5F5F5] p-4 shadow-[3px_3px_0px_#000000] flex flex-col gap-2 min-w-[240px] w-[240px] shrink-0">
-                <div class="h-28 bg-gray-300 border-[2px] border-black w-full overflow-hidden">
-                    {work.data.image && (
-                        <img src={work.data.image} alt={work.data.title} class="w-full h-full object-cover" />
-                    )}
-                </div>
-                <h3 class="font-dela text-sm uppercase truncate">{work.data.title}</h3>
-                <p class="text-xs text-gray-600 line-clamp-2">{work.data.description}</p>
-            </div>
-        ))}
-    </div>
+  <div class="flex gap-4 overflow-x-auto pb-4 mb-4 mt-5">
+    {works.map((work: any) => (
+      <div class="border-[3px] border-black bg-[#F5F5F5] p-4 shadow-[3px_3px_0px_#000000] flex flex-col gap-2 min-w-[240px] w-[240px] shrink-0">
+        <div class="h-28 bg-gray-300 border-2 border-black overflow-hidden">
+          {work.data.image && (
+            <img src={work.data.image} alt={work.data.title} class="w-full h-full object-cover" loading="lazy" />
+          )}
+        </div>
+        <h3 class="font-dela text-sm uppercase truncate">{work.data.title}</h3>
+        <p class="text-xs text-gray-600 line-clamp-2">{work.data.description}</p>
+      </div>
+    ))}
+  </div>
 
-    <!-- Bouton VIEW MORE aligné à droite -->
-    <div class="flex justify-end">
-        <a href="/projets" class="border-[3px] border-black bg-[#A3D8E2] px-4 py-2 font-dela text-xs uppercase shadow-[3px_3px_0px_#000000] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none transition-all">
-            VIEW MORE
-        </a>
-    </div>
-
+  <div class="flex justify-end">
+    <a href="/projets" class="border-[3px] border-black bg-[#A3D8E2] px-4 py-2 font-dela text-xs uppercase shadow-[3px_3px_0px_#000000]">
+      VIEW MORE
+    </a>
+  </div>
 </section>

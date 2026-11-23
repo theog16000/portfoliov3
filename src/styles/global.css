@@ -143,6 +143,28 @@
     4px 4px 0px #000;
 }
 
+@layer components {
+  .neo-card {
+    @apply border-2 border-black bg-[#F4EFEA] p-4 shadow-[4px_4px_0px_#000000] mx-auto flex flex-col max-w-sm w-full;
+  }
+
+  .neo-title {
+    @apply font-dela text-3xl text-[#F4EFEA] tracking-[-0.011em];
+  }
+
+  .neo-input {
+    @apply w-full bg-white border-2 border-black px-3 py-2.5 font-mono text-sm shadow-[2px_2px_0px_#000000] placeholder:text-black/30 outline-none transition-all;
+  }
+
+  .neo-icon {
+    @apply flex items-center justify-center w-8 h-8 border-2 border-black bg-white shadow-[2px_2px_0px_#000000] transition-all duration-200 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none;
+  }
+
+  .neo-cta {
+    @apply border-2 border-black bg-[#FBD74B] font-mono font-bold uppercase shadow-[3px_3px_0px_#000000] transition-all duration-200 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none;
+  }
+}
+
 @layer utilities {
   /* Animation de rotation continue sur 360 degrés */
   @keyframes spin-slow {
@@ -184,4 +206,15 @@
       transform: translateX(-100%);
     }
   }
+}
+
+.accessibility-panel button {
+  min-height: 2.5rem;
+  border: 1px solid #151515;
+  background: #E2ECE4; /* <-- Remplace #f4efe9 ici */
+  padding: 0.5rem 0.65rem;
+  color: #151515;
+  cursor: pointer;
+  font: 700 0.65rem "Space Mono", monospace;
+  text-align: left;
 }

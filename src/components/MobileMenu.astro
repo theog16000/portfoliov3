@@ -1,17 +1,22 @@
 ---
-import Bouton from "./Bouton.jsx";
-import { House, User, BriefcaseBusiness, Github, Linkedin } from 'lucide-astro';
+import { House, User, BriefcaseBusiness, Mail, Github, Linkedin } from "lucide-astro";
 import Star33 from "./stars/Star33";
 
 const links = [
-  { href: '/', label: 'Home', num: '01', icon: House, curtain: '#FBE38E' },
-  { href: '/apropos.pdf', label: 'About', num: '02', icon: User, curtain: '#7DFFB3' },
-  { href: '/projets', label: 'Projects', num: '03', icon: BriefcaseBusiness, curtain: '#A3D8E2' },
+  { href: "/", label: "Home", num: "01", icon: House, color: "#FBE38E" },
+  { href: "/about", label: "About", num: "02", icon: User, color: "#7DFFB3" },
+  { href: "/projets", label: "Projects", num: "03", icon: BriefcaseBusiness, color: "#A3D8E2" },
+  { href: "/contact", label: "Contact", num: "04", icon: Mail, color: "#FBD74B" },
+];
+
+const ticker = [
+  { color: "#7DD8EC", text: "MENU" },
+  { color: "#FBD74B", text: "NAVIGATION" },
+  { color: "#FF6B6B", text: "EXPLORE" },
 ];
 ---
 
 <div class="md:hidden">
-  <!-- Bouton Burger Neobrutaliste -->
   <button
     id="mobile-menu-btn"
     type="button"
@@ -24,86 +29,74 @@ const links = [
     <span class="burger-bar w-5 h-0.5 bg-black rounded-full transition-transform duration-300"></span>
   </button>
 
-  <!-- Overlay plein écran style "index" -->
-  <div
-    id="mobile-drawer"
-    class="hidden fixed inset-0 bg-[#F4EFEA] z-[60] flex flex-col"
-  >
-    <!-- Bandeau défilant avec étoiles bien alignées et dimensionnées -->
+  <div id="mobile-drawer" class="hidden fixed inset-0 bg-[#F4EFEA] z-[60] flex flex-col">
     <div class="relative overflow-hidden border-b-2 border-black bg-black py-2 shrink-0">
       <div class="flex whitespace-nowrap items-center">
-        <span class="animate-marquee shrink-0 font-mono font-black text-sm uppercase tracking-widest text-white pr-8 flex items-center gap-3">
-          <Star33 size={16} color="#7DD8EC" stroke="black" strokeWidth={3} /> MENU 
-          <Star33 size={16} color="#FBD74B" stroke="black" strokeWidth={3} /> NAVIGATION 
-          <Star33 size={16} color="#FF6B6B" stroke="black" strokeWidth={3} /> EXPLORE
-        </span>
-        <span class="animate-marquee shrink-0 font-mono font-black text-sm uppercase tracking-widest text-white pr-8 flex items-center gap-3" aria-hidden="true">
-          <Star33 size={16} color="#7DD8EC" stroke="black" strokeWidth={3} /> MENU 
-          <Star33 size={16} color="#FBD74B" stroke="black" strokeWidth={3} /> NAVIGATION 
-          <Star33 size={16} color="#FF6B6B" stroke="black" strokeWidth={3} /> EXPLORE
-        </span>
+        {[0, 1].map((copy) => (
+          <span
+            class="animate-marquee shrink-0 font-mono font-black text-sm uppercase tracking-widest text-white pr-8 flex items-center gap-3"
+            aria-hidden={copy === 1}
+          >
+            {ticker.map(({ color, text }) => (
+              <>
+                <Star33 size={16} color={color} stroke="black" strokeWidth={3} /> {text}
+              </>
+            ))}
+          </span>
+        ))}
       </div>
     </div>
 
-    <!-- Liens de navigation, style index plein écran -->
     <nav class="flex-1 flex flex-col justify-center px-5 gap-3">
       {links.map((link, i) => {
         const Icon = link.icon;
         return (
           <a
             href={link.href}
-            data-curtain-color={link.curtain}
-            data-hover-color={link.curtain}
+            data-hover-color={link.color}
             aria-label={link.label.toUpperCase()}
-            style={`transition-delay: ${i * 70}ms;`}
+            style={`transition-delay: ${i * 70}ms; --row-hover: ${link.color}`}
             class="menu-row group flex items-center gap-4 bg-white border-2 border-black shadow-[3px_3px_0px_#000] px-4 py-4 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
           >
             <span class="font-mono text-xs font-bold text-black/40">{link.num}</span>
-            <Icon class="w-5 h-5 text-black shrink-0 transition-transform duration-200 group-active:scale-90" stroke-width={2.4} />
+            <Icon class="w-5 h-5 text-black shrink-0" stroke-width={2.4} />
             <span class="font-black text-xl uppercase tracking-tight flex-1">{link.label}</span>
-            <span class="text-lg transition-transform duration-200 group-active:translate-x-1">→</span>
+            <span class="text-lg">→</span>
           </a>
         );
       })}
     </nav>
 
-    <!-- Bas : CTA + réseaux sociaux -->
-    <div class="shrink-0 px-5 pb-6 pt-2 flex flex-col gap-3 border-t-2 border-black/15">
-      <Bouton href="/contact" className="w-full text-center" client:load>Contact</Bouton>
-
-      <div class="flex gap-2">
-        <a
-          href="https://github.com/theog16000"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="flex-1 flex items-center justify-center gap-2 py-2 bg-white border-2 border-black shadow-[2px_2px_0px_#000] font-mono font-bold text-xs uppercase active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all"
-        >
-          <Github class="w-4 h-4 text-black" stroke-width={2.2} /> GitHub
-        </a>
-        <a
-          href="https://fr.linkedin.com/in/theogty"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="flex-1 flex items-center justify-center gap-2 py-2 bg-white border-2 border-black shadow-[2px_2px_0px_#000] font-mono font-bold text-xs uppercase active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all"
-        >
-          <Linkedin class="w-4 h-4 text-black" stroke-width={2.2} /> LinkedIn
-        </a>
-      </div>
+    <div class="shrink-0 px-5 pb-6 pt-2 flex gap-2 border-t-2 border-black/15">
+      <a
+        href="https://github.com/theog16000"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex-1 flex items-center justify-center gap-2 py-2 bg-white border-2 border-black shadow-[2px_2px_0px_#000] font-mono font-bold text-xs uppercase active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
+      >
+        <Github class="w-4 h-4" stroke-width={2.2} /> GitHub
+      </a>
+      <a
+        href="https://fr.linkedin.com/in/theogty"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex-1 flex items-center justify-center gap-2 py-2 bg-white border-2 border-black shadow-[2px_2px_0px_#000] font-mono font-bold text-xs uppercase active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
+      >
+        <Linkedin class="w-4 h-4" stroke-width={2.2} /> LinkedIn
+      </a>
     </div>
   </div>
 </div>
 
 <style>
   .menu-row {
-    transform: translateX(40px);
+    transform: translateY(24px);
     opacity: 0;
-    transition-property: transform, opacity, background-color;
-    transition-duration: 0.45s, 0.45s, 0.15s;
-    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1), cubic-bezier(0.22, 1, 0.36, 1), ease-out;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.15s ease-out;
   }
 
   #mobile-drawer.menu-open .menu-row {
-    transform: translateX(0);
+    transform: translateY(0);
     opacity: 1;
   }
 
@@ -114,60 +107,52 @@ const links = [
 
 <script>
   function setupMobileMenu() {
-    const btn = document.getElementById('mobile-menu-btn');
-    const drawer = document.getElementById('mobile-drawer');
+    const btn = document.getElementById("mobile-menu-btn");
+    const drawer = document.getElementById("mobile-drawer");
     if (!btn || !drawer) return;
 
-    const bars = btn.querySelectorAll('.burger-bar');
-    const rows = drawer.querySelectorAll('.menu-row');
+    const menuButton = btn as HTMLButtonElement;
+    const menuDrawer = drawer as HTMLElement;
 
-    rows.forEach((row) => {
-      const color = row.getAttribute('data-hover-color');
-      if (color) (row as HTMLElement).style.setProperty('--row-hover', color);
-    });
+    if (menuButton.dataset.ready) return;
+    menuButton.dataset.ready = "1";
 
+    const bars = menuButton.querySelectorAll<HTMLElement>(".burger-bar");
     let isOpen = false;
 
     function toggleMenu(show?: boolean) {
-      isOpen = typeof show === 'boolean' ? show : !isOpen;
-      btn.setAttribute('aria-expanded', String(isOpen));
+      isOpen = typeof show === "boolean" ? show : !isOpen;
+      menuButton.setAttribute("aria-expanded", String(isOpen));
 
       if (isOpen) {
-        drawer.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-        requestAnimationFrame(() => {
-          drawer.classList.add('menu-open');
-        });
+        menuDrawer.classList.remove("hidden");
+        document.body.style.overflow = "hidden";
+        requestAnimationFrame(() => menuDrawer.classList.add("menu-open"));
         if (bars.length === 3) {
-          bars[0].style.transform = 'translateY(6px) rotate(45deg)';
-          bars[1].style.opacity = '0';
-          bars[2].style.transform = 'translateY(-6px) rotate(-45deg)';
+          bars[0].style.transform = "translateY(6px) rotate(45deg)";
+          bars[1].style.opacity = "0";
+          bars[2].style.transform = "translateY(-6px) rotate(-45deg)";
         }
       } else {
-        drawer.classList.remove('menu-open');
-        document.body.style.overflow = '';
-        setTimeout(() => drawer.classList.add('hidden'), 150);
-        if (bars.length === 3) {
-          bars[0].style.transform = '';
-          bars[1].style.opacity = '1';
-          bars[2].style.transform = '';
-        }
+        menuDrawer.classList.remove("menu-open");
+        document.body.style.overflow = "";
+        setTimeout(() => menuDrawer.classList.add("hidden"), 180);
+        bars.forEach((bar) => {
+          bar.style.transform = "";
+          bar.style.opacity = "1";
+        });
       }
     }
 
-    btn.onclick = (e) => {
+    menuButton.onclick = (e) => {
       e.stopPropagation();
       toggleMenu();
     };
 
-    drawer.querySelectorAll('.menu-row').forEach((link) => {
-      link.addEventListener('click', () => toggleMenu(false));
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (isOpen && e.key === 'Escape') toggleMenu(false);
+    menuDrawer.querySelectorAll(".menu-row").forEach((link) => {
+      link.addEventListener("click", () => toggleMenu(false));
     });
   }
 
-  document.addEventListener('astro:page-load', setupMobileMenu);
+  document.addEventListener("astro:page-load", setupMobileMenu);
 </script>
